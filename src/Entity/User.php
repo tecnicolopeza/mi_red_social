@@ -53,11 +53,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'sender', targetEntity: PrivateMessages::class)]
     private $privateMessages;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Following::class)]
+    private $followings;
+
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
         $this->publications = new ArrayCollection();
         $this->privateMessages = new ArrayCollection();
+        $this->followings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -286,6 +290,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($privateMessage->getSender() === $this) {
                 $privateMessage->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Following>
+     */
+    public function getFollowings(): Collection
+    {
+        return $this->followings;
+    }
+
+    public function addFollowing(Following $following): self
+    {
+        if (!$this->followings->contains($following)) {
+            $this->followings[] = $following;
+            $following->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowing(Following $following): self
+    {
+        if ($this->followings->removeElement($following)) {
+            // set the owning side to null (unless already changed)
+            if ($following->getUser() === $this) {
+                $following->setUser(null);
             }
         }
 
