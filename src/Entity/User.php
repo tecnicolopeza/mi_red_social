@@ -50,10 +50,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Publications::class)]
     private $publications;
 
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: PrivateMessages::class)]
+    private $privateMessages;
+
     public function __construct()
     {
         $this->notifications = new ArrayCollection();
         $this->publications = new ArrayCollection();
+        $this->privateMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -252,6 +256,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($publication->getUser() === $this) {
                 $publication->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PrivateMessages>
+     */
+    public function getPrivateMessages(): Collection
+    {
+        return $this->privateMessages;
+    }
+
+    public function addPrivateMessage(PrivateMessages $privateMessage): self
+    {
+        if (!$this->privateMessages->contains($privateMessage)) {
+            $this->privateMessages[] = $privateMessage;
+            $privateMessage->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrivateMessage(PrivateMessages $privateMessage): self
+    {
+        if ($this->privateMessages->removeElement($privateMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($privateMessage->getSender() === $this) {
+                $privateMessage->setSender(null);
             }
         }
 
