@@ -8,11 +8,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PublicationsController extends AbstractController
 {
-    #[Route('/publications', name: 'app_publications')]
-    public function index(): Response
+    #[Route('/home', name: 'home')]
+    public function home(): Response
     {
-        return $this->render('publications/index.html.twig', [
-            'controller_name' => 'PublicationsController',
+        return $this->render('publications/home.html.twig', [
+            'title' => 'Home',
         ]);
     }
 }
