@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <!--Script validación nick exists en BD-->
+    <script scr="{{ asset('js/nickCheck.js') }}"></script>
+{% endblock %}
+
 {% block title %}{{title}}{% endblock %}
 
 {% block body %}
@@ -12,8 +18,10 @@
 <div class="col-md-3">
 
 </div>
+
+<!--Formulario-->
 <div class="col-md-6">
-    {{ form_start(form) }}
+    {{ form_start(form) }} 
     {{ form_widget(form) }}
     {{ form_end(form) }}
 </div>

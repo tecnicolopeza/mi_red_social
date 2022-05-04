@@ -20,7 +20,11 @@ class RegisterType extends AbstractType
             ->add('surname', TextType::class)
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
-            ->add('nick', TextType::class)
+            ->add('nick', TextType::class, array(
+                'attr'=> array(
+                    'class'=>'nick-input'
+                )
+            ))
             ->add('Register', SubmitType::class, array(
                 'attr'=> array(
                     'class'=>'btn-dark mt-2'
