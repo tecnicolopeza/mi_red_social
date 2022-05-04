@@ -11,7 +11,7 @@ use App\Form\RegisterType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
@@ -24,16 +24,46 @@ class UserController extends AbstractController
 
 
     #[Route('/login', name: 'login')]
-    public function login(): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        //En caso de estar registrado no puedes entrar
+        if (is_object($this->getUser())) {
+            return $this->redirectToRoute('home');
+        }
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUserName = $authenticationUtils->getLastUsername();
+
+
         return $this->render('user/login.html.twig', [
             'title' => 'Login',
+            'error' => $error,
+            'last_username' => $lastUserName,
         ]);
     }
+
+    #[Route('/logout', name: 'logout')]
+    public function logout() { }
+
+
+    #[Route('/account', name: 'account')]
+    public function editUser(Request $request) { 
+
+        return $this->render('user/editUser.html.twig', [
+            'title' => 'Account',
+        ]);
+
+    }
+
 
     #[Route('/register', name: 'register')]
     public function register(Request $request, UserPasswordHasherInterface $encoder, PersistenceManagerRegistry $doctrine): Response
     {
+        //En caso de estar registrado no puedes entrar
+        if (is_object($this->getUser())) {
+            return $this->redirectToRoute('home');
+        }
+        //Se crea un nuevo usuario con los datos del formulario
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -80,6 +110,7 @@ class UserController extends AbstractController
         }else{
             $result = "unused";
         }
+        var_dump($result);
 
         return new Response($result);
     }
