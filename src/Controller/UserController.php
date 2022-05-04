@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
@@ -21,7 +22,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/register', name: 'register')]
-    public function register(Request $request, PersistenceManagerRegistry $doctrine): Response
+    public function register(Request $request, UserPasswordHasherInterface $encoder, PersistenceManagerRegistry $doctrine): Response
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -32,6 +33,8 @@ class UserController extends AbstractController
 
             $user->setActive(false);
             $user->setRoles(['ROLE_USER']);
+            $encoded = $encoder->hashPassword($user,$user->getPassword()); #codifica la contraseña
+            $user->setPassword($encoded);
 
             $entityManager = $doctrine->getManager();
             $entityManager->persist($user);
