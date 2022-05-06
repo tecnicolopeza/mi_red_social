@@ -4,8 +4,28 @@
 
 {% block body %}
 <body>
+
+<div class="container mt-4">
 <div class="row">
-<h1 class="display-4 mx-auto text-center">{{title}}</h1>
+
+<h1 class="mx-auto text-center display-4">{{title}}</h1>
+</div>
+<div class="row mt-4">
+<div class="col-md-3">
+
+</div>
+
+<!--Formulario-->
+<div class="col-md-6">
+    {{ form_start(form,{ 'enctype':'multipart/form-data' }) }} 
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+</div>
+<div class="col-md-3">
+
+</div>
+
+</div>
 </div>
 </body>
 {% endblock %}

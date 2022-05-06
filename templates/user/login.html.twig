@@ -7,8 +7,6 @@
     <div class="container mt-4">
         <div class="row">
             
-        
-    
 
 <h1 class="display-4 mx-auto text-center">{{title}}</h1>
 </div>
@@ -30,7 +28,7 @@
         <div>{{ error.messageKey|trans(error.messageData, 'login')}}</div>
         {% endif %}
         <form action="{{path('login')}}" method="post">
-            <label for="username">Username:</label>
+            <label for="username">Email:</label>
             <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}">
 
             <label for="password">Password:</label>

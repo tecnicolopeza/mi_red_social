@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Form\RegisterType;
+use App\Form\EditUserType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -26,14 +27,13 @@ class UserController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        //En caso de estar registrado no puedes entrar
+        //En caso de no estar registrado no puedes entrar
         if (is_object($this->getUser())) {
             return $this->redirectToRoute('home');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUserName = $authenticationUtils->getLastUsername();
-
 
         return $this->render('user/login.html.twig', [
             'title' => 'Login',
@@ -49,8 +49,11 @@ class UserController extends AbstractController
     #[Route('/account', name: 'account')]
     public function editUser(Request $request) { 
 
+        $user = $this->getUser();
+        $form = $this->createForm(EditUserType::class, $user);
+
         return $this->render('user/editUser.html.twig', [
-            'title' => 'Account',
+            'title' => 'Account', 'form'=>$form->createView()
         ]);
 
     }
