@@ -10,6 +10,7 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use App\Form\EditUserType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -35,6 +36,7 @@ class UserController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUserName = $authenticationUtils->getLastUsername();
 
+
         return $this->render('user/login.html.twig', [
             'title' => 'Login',
             'error' => $error,
@@ -46,12 +48,54 @@ class UserController extends AbstractController
     public function logout() { }
 
 
+
+    //Editar user desde account
     #[Route('/account', name: 'account')]
-    public function editUser(Request $request) { 
+    public function editUser(Request $request, PersistenceManagerRegistry $doctrine): Response { 
 
-        $user = $this->getUser();
-        $form = $this->createForm(EditUserType::class, $user);
+        $user_image = $this->getUser()->getImage();
+        $form = $this->createForm(EditUserType::class, $this->getUser());
 
+
+        $form->handleRequest($request);
+
+        $repository = $doctrine->getRepository(User::class); //acceso repositorio entidad User
+        $user_bbdd = $repository->findOneBy(['email'=>$this->getUser()->getEmail()]);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            if ($user_bbdd != null && $user_bbdd->getEmail() == $this->getUser()->getEmail() &&
+            $user_bbdd->getNick() == $this->getUser()->getNick() || $user_bbdd == null) {
+                
+                $file = $form['image']->getData();
+                
+                if(!empty($file) && $file != null){
+                    $extension = $file->guessExtension();
+
+                    if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'gif') {
+                        $name_img = $this->getUser()->getId() . time() . '.' .$extension;
+
+                        $file->move("img", $name_img);
+                        $this->getUser()->setImage($name_img);
+                    }
+                }else{
+                    $this->getUser()->setImage($$user_image);
+                }
+
+
+                $entityManager = $doctrine->getManager();
+                $entityManager->persist($this->getUser());
+                $flush = $entityManager->flush();
+            }
+            if ($flush == null) { #si el registro fue correcto
+                $msg = 'Data modification has been successful.';
+
+            }else{
+                $msg = 'Data modification faile, please try again.';
+            }
+            $this->session->getFlashBag()->add('msg',$msg); #funcionabilidad para mensajes de confirmación 
+            return $this->redirectToRoute('account'); #redirecciona al login
+        }
         return $this->render('user/editUser.html.twig', [
             'title' => 'Account', 'form'=>$form->createView()
         ]);
