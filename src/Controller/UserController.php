@@ -79,7 +79,7 @@ class UserController extends AbstractController
                         $this->getUser()->setImage($name_img);
                     }
                 }else{
-                    $this->getUser()->setImage($$user_image);
+                    $this->getUser()->setImage($user_image);
                 }
 
 
