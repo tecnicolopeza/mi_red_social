@@ -42,6 +42,9 @@ security:
         # ROLES NECESARIOS PARA PODER ENTRAR
         - { path: ^/home, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/account, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/search, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/follow, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/unfollow, roles: [ROLE_USER, ROLE_ADMIN] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
