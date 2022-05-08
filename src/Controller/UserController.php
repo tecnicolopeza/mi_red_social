@@ -10,7 +10,6 @@ use App\Entity\User;
 use App\Form\RegisterType;
 use App\Form\EditUserType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;

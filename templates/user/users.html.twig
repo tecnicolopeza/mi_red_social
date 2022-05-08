@@ -49,6 +49,14 @@
                 <br>
                 <span class="mx-2">{{user.bio}}</span>
             </span>
+
+            {% if app.user.id != user.id %}
+                <div class="float-end">
+                    <button type="button" class="btn btn-dark btn-sm btn-follow"
+                    data-btn-follow="{{user.id}}">Follow</button>
+                    <button type="button" class="btn btn-secondary btn-sm btn-unfollow">Unfollow</button>
+                </div>
+            {% endif %}
             <hr>
             
         </div>

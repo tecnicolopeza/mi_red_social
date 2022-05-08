@@ -20,4 +20,24 @@ let ias = new InfiniteAjaxScroll('.content-users', {
   
     el.style.opacity = '1';
   })
+
+  ias.on('appended', function() {
+      followBtn();
+  })
+  ias.on('binded', function() {
+      followBtn();
+  })
 });
+
+function followBtn(){
+    $(".btn-follow").unbind("click").click(function(){
+        $.ajax({ //comunicación asincrona envia datos
+            url: '/follow',
+            data: { followed: $(this).attr('dta-btn-follow') },
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+}
