@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -27,6 +28,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    /**
+     * @Assert\Email(
+     *     message = "El email '{{ value }}' no es un email valido."
+     * )
+     */
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -36,9 +42,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 10,
+     *      minMessage = "El name debe ser mayor a {{ limit }} caracteres.",
+     *      maxMessage = "El name no puede tener mas de {{ limit }} caracteres."
+     * )
+     */
     private $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 10,
+     *      minMessage = "El surname debe ser mayor a {{ limit }} caracteres",
+     *      maxMessage = "El surname no puede tener mas de {{ limit }} caracteres"
+     * )
+     */
     private $surname;
 
     #[ORM\Column(type: 'string', length: 60, nullable: true)]

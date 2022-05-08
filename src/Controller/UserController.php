@@ -14,6 +14,7 @@ use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Knp\Component\Pager\PaginatorInterface;
 
 class UserController extends AbstractController
 {
@@ -101,6 +102,53 @@ class UserController extends AbstractController
         ]);
 
     }
+
+    #[Route('/people', name: 'people')]
+    public function users(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+    {
+
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(User::class);
+        $query = $repository->createQueryBuilder('p')
+        ->orderBy('p.id','ASC')->getQuery();
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page',1),
+            5
+        );
+
+        return $this->render('user/users.html.twig', [
+            'title' => 'People', 'users' => $users
+        ]);
+    }
+
+    #[Route('/search', name: 'search')]
+    public function userSearch(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+    {
+
+        $search = $request->query->get('search', null);
+
+        if($search == null){
+            return $this->redirectToRoute('home');
+        }
+        $em = $doctrine->getManager();
+        $repository = $em->getRepository(User::class);
+        $query = $repository->createQueryBuilder('p')
+        ->orderBy('p.id','ASC')
+        ->where('p.name LIKE :searchTerm OR p.surname LIKE :searchTerm OR p.nick LIKE :searchTerm')
+        ->setParameter('searchTerm','%' . $search . '%')->getQuery();
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page',1),
+            5
+        );
+
+        return $this->render('user/users.html.twig', [
+            'title' => 'People', 'users' => $users
+        ]);
+    }
+
+
 
 
     #[Route('/register', name: 'register')]
