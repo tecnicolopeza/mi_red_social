@@ -18,7 +18,7 @@ class FollowingController extends AbstractController
         $user = $this->getUser();
         $followed_id = $request->get('followed');
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager = $doctrine->getManager();
         $user_repository = $entityManager->getRepository(User::class);
 
         $followed = $user_repository->find($followed_id);
