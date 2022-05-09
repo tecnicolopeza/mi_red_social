@@ -1,5 +1,7 @@
 $(document).ready(function() { //valida el nick
 
+    console.log("Script working properly");
+
     $('.nick-input').blur(function(event) {
 
         var nick = this.value;

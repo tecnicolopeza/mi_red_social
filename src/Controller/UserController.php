@@ -197,14 +197,13 @@ class UserController extends AbstractController
         $nick = $request->get('nick');
         $repository = $doctrine->getRepository(User::class); //acceso repositorio entidad User
         $user_nick = $repository->findOneBy(['nick'=>$nick]);
-        $result = "used";
+        $result = "";
 
         if ($user_nick != null) {
             $result = "used";
         }else{
             $result = "unused";
         }
-        var_dump($result);
 
         return new Response($result);
     }

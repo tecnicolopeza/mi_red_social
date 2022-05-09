@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    console.log("user Script working properly");
+
+
     let ias = new InfiniteAjaxScroll('.content-users', {
         item: '.user-item',
         next: '.pagination .link-next',
