@@ -26,17 +26,36 @@ $(document).ready(function() {
 
     ias.on('appended', function() {
         followBtn();
+        unfollowBtn();
     })
     ias.on('binded', function() {
         followBtn();
+        unfollowBtn();
     })
 });
 
 function followBtn() {
     $(".btn-follow").unbind("click").click(function() {
+        $(this).addClass("d-none");
+        $(this).parent().find(".btn-unfollow").removeClass("d-none");
         $.ajax({
             url: '/follow',
             data: { followed: $(this).attr('data-btn-follow') },
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+}
+
+function unfollowBtn() {
+    $(".btn-unfollow").unbind("click").click(function() {
+        $(this).addClass("d-none");
+        $(this).parent().find(".btn-follow").removeClass("d-none");
+        $.ajax({
+            url: '/unfollow',
+            data: { followed: $(this).attr('data-btn-unfollow') },
             type: 'POST',
             success: function(data) {
                 console.log(data);

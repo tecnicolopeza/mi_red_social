@@ -41,8 +41,28 @@ class FollowingController extends AbstractController
     }
 
     #[Route('/unfollow', name: 'unfollow', methods:['POST'])]
-    public function unfollow(): Response
+    public function unfollow(Request $request, PersistenceManagerRegistry $doctrine): Response
     {
-        return new Response('unfollow function');
+        $user = $this->getUser();
+        $followed_id = $request->get('followed');
+
+        $entityManager = $doctrine->getManager();
+        $user_repository = $entityManager->getRepository(Following::class);
+
+        $followed = $user_repository->findOneBy([
+            'user' => $user,
+            'followed' => $followed_id,
+        ]);
+
+        $entityManager->remove($followed);
+        $flush = $entityManager->flush();
+
+        if ($flush == null){
+            $msg = 'Now you are not following this user.';
+        }else{
+            $msg = 'Request failed, please try later.';
+        }
+
+        return new Response($msg);
     }
 }
