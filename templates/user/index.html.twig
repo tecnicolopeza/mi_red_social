@@ -1,0 +1,26 @@
+{% extends 'baseIndex.html.twig' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-lg-9 p-0" style="height:100vh;  ">
+      <img src="{{ asset("img/index.jpg") }}" class="img-fluid" alt="" style="height:100vh;  ">
+    </div>
+    <div class="col col-lg-3 p-5 d-flex flex-column justify-content-between">
+      <h1 class="text-center m-2">OtakuRoom</h1>
+      <div class="mx-auto p-1 d-flex flex-column">
+        <h4>¿No tienes una cuenta?</h4>
+        <a class="btn text-decoration-none" href="{{ path('register') }}"><button type="button" class="btn btn-warning text-light fw-bolder">REGISTRARSE</button></a>
+      </div>
+      <div class="mx-auto p-3 d-flex flex-column">
+        <h4>¿Ya tienes cuenta?</h4>
+        <a class="btn text-decoration-none" href="{{ path('login') }}"><button type="button" class="btn btn-info text-light fw-bolder">INICIAR SESION</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+{% endblock %}
