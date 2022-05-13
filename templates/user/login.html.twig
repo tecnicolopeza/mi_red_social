@@ -33,7 +33,7 @@
         <div>{{ error.messageKey|trans(error.messageData, 'login')}}</div>
         {% endif %}
         <form action="{{path('login')}}" method="post">
-            <label for="username">Email:</label>
+            <label for="username">Email or nick:</label>
             <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}">
 
             <label for="password">Password:</label>
