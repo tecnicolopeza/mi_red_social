@@ -90,7 +90,7 @@ class CustomExtension extends AbstractExtension
                 return "$days days ago";
             }
 
-        } else if($weeks >= 4.3){
+        } else if($weeks <= 4.3){
 
             if ($weeks == 1) {
                 return "a week ago";

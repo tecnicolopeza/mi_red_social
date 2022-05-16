@@ -38,3 +38,9 @@ $(document).ready(function() {
 function btn_tooltip() {
     $('[data-toggle]="tooltip"').tooltip();
 }
+
+function buttons() {
+    $(".btn-delete-pub").unbind('click').click(function() {
+        $(this).parent().parent().addClass('hidden');
+    });
+}

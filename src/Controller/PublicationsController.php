@@ -96,4 +96,30 @@ class PublicationsController extends AbstractController
 
         return $pagination;
     }
+
+    public function removePublicationAction($request, $doctrine, $id=null){
+        $em = $doctrine->getManager();
+        $publications = $em->getRepository(Publications::class);
+        $publication = $publications->find($id); #busca la publicacion por el id
+        $user = $this->getUser();
+
+        if ($user->getId() == $publication->getUser()->getId()) {
+
+            $em->remove($publication);
+            
+            $em->persist($publication);
+            $flush = $em->flush();
+            
+            if($flush==null){
+                $status = 'La publicación se ha borrado correctamente.';
+            }else{
+                $status = 'La publicación no se ha borrado.';
+            }
+        }else{
+            $status = 'La publicación no se ha borrado.';
+        }
+            
+        return new Response($status);
+    }
+
 }
