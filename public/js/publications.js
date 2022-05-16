@@ -22,4 +22,19 @@ $(document).ready(function() {
 
         el.style.opacity = '1';
     })
+
+    ias.on('appended', function() {
+        btn_tooltip();
+    })
+
+    ias.on('binded', function() {
+        btn_tooltip();
+    })
+
+
 });
+
+
+function btn_tooltip() {
+    $('[data-toggle]="tooltip"').tooltip();
+}
