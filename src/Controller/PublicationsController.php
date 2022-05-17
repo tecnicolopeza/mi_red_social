@@ -97,7 +97,8 @@ class PublicationsController extends AbstractController
         return $pagination;
     }
 
-    public function removePublicationAction($request, $doctrine, $id=null){
+    #[Route('/publication/remove/{id}', name: 'remove')]
+    public function remove($id=null, PersistenceManagerRegistry $doctrine){
         $em = $doctrine->getManager();
         $publications = $em->getRepository(Publications::class);
         $publication = $publications->find($id); #busca la publicacion por el id
@@ -107,7 +108,6 @@ class PublicationsController extends AbstractController
 
             $em->remove($publication);
             
-            $em->persist($publication);
             $flush = $em->flush();
             
             if($flush==null){
