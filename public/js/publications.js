@@ -27,12 +27,14 @@ $(document).ready(function() {
         // btn_tooltip();
         likeBtn();
         dislikeBtn();
+        deleteBtn();
     })
 
     ias.on('binded', function() {
         // btn_tooltip();
         likeBtn();
         dislikeBtn();
+        deleteBtn();
     })
 
 
@@ -43,13 +45,13 @@ $(document).ready(function() {
 //     $('[data-toggle]="tooltip"').tooltip();
 // }
 
-function buttons() {
+function deleteBtn() {
     $(".btn-delete-pub").unbind('click').click(function() {
         $(this).parent().parent().addClass('hidden');
 
         $.ajax({
-            url: URL+'/publication/remove/'+$(this).attr("data-id"),
-            type: 'GET',
+            url: '/publication/remove/'+$(this).attr("data-id"),
+            type: 'POST',
             success: function(response){
                 console.log(response);
             }

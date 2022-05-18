@@ -97,7 +97,7 @@ class PublicationsController extends AbstractController
         return $pagination;
     }
 
-    #[Route('/publication/remove/{id}', name: 'remove')]
+    #[Route('/publication/remove/{id}', name: 'remove', methods:['POST'])]
     public function remove($id=null, PersistenceManagerRegistry $doctrine){
         $em = $doctrine->getManager();
         $publications = $em->getRepository(Publications::class);
@@ -110,16 +110,16 @@ class PublicationsController extends AbstractController
             
             $flush = $em->flush();
             
-            if($flush==null){
-                $status = 'La publicación se ha borrado correctamente.';
+            if ($flush == null){
+                $msg = 'Publicacion borrada.';
             }else{
-                $status = 'La publicación no se ha borrado.';
+                $msg = 'Request failed, please try later.';
             }
         }else{
-            $status = 'La publicación no se ha borrado.';
+            $msg = 'La publicación no se ha borrado.';
         }
             
-        return new Response($status);
+        return new Response($msg);
     }
 
 }
