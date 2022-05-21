@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use App\Entity\Publications;
 use App\Form\RegisterType;
 use App\Form\EditUserType;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
@@ -213,5 +214,41 @@ class UserController extends AbstractController
         }
 
         return new Response($result);
+    }
+
+
+    #[Route('/profile', name: 'profile')]
+    public function profileAction(Request $request, PersistenceManagerRegistry $doctrine, PaginatorInterface $paginator){
+
+        $em = $doctrine->getManager();
+        $nickname = $request->get('nick');
+
+        if($nickname != null){
+            $repository = $em->getRepository(User::class);
+            $user = $repository->findOneBy(array("nick" => $nickname));
+        }else{
+            $user = $this->getUser();
+        }
+
+        if(empty($user) || !is_object($user)){
+            return $this->redirectToRoute('home');
+        }
+
+        $repositoryPublication = $em->getRepository(Publications::class);
+
+        $user_id = $user->getId();
+
+        $publications = $repositoryPublication->findUserPublications($this->getUser()->getId());
+
+        
+        $pagination = $paginator->paginate(
+            $publications,
+            $request->query->getInt('page',1),
+            5
+        );
+
+        return $this->render('user/profile.html.twig', [
+            'title' => 'Profile', 'pagination' => $pagination
+        ]);
     }
 }
