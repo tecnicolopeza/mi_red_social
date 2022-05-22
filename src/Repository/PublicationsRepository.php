@@ -90,4 +90,19 @@ class PublicationsRepository extends ServiceEntityRepository
 
         return $resultSet->fetchAll();
     }
+
+    public function findUserPublications($user){
+        
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+                SELECT * FROM publications p WHERE p.user_id = :user 
+                ORDER BY p.id DESC;
+                ';
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user'=>$user]);
+
+        return $resultSet->fetchAll();
+    }
 }

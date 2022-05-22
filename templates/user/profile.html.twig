@@ -1,39 +1,76 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{title}}{% endblock %}
+
 {% block javascripts %}
 {{ parent() }}
 <script src="{{ asset('js/publications.js')}}"></script>
 {% endblock %}
 
-{% block stylesheets %}
-{{ parent() }}
-    <style>
-    .no-more{
-        opacity:0;
-    }
-    </style>
-{% endblock %}
-
-{% block title %}{{title}}{% endblock %}
-
 {% block body %}
 <body>
-<div class="container mt-4">
-    {% for message in app.session.flashBag.get('msg') %} <!--Mensaje de registro correcto-->
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{message}} 
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            {# <span aria-hidden="true">&times;</span> #}
-        </button>
-        </div>
-        {% endfor %}
-    <div class="row">
+    <div class="container mt-4 content-publications">     
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4 text-center">{{title}}</h1>
+            </div>
+        </div>           
+        <div class="card mb-3 border-secondary p-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            {% if app.user.image == null %}
 
-        <div class="col-md-8">
-            <div class="card border-secondary mb-3" style="min-height:40em">
-                <div class="card-header bg-transparent text-dark mb-3">Timeline</div>
-                <div class="card-body text-secondary p-0 content-publications">
-                    
+                            <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
+
+                            {% else %}
+
+                            <img src="{{ asset("img/"~app.user.image) }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{app.user.nick}}</h5>
+                            <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
+                            <p class="card-text">{{app.user.bio}}</p>
+                            <div class="d-flex flex-row-reverse p-3">
+                                <a href="{{ path('account')}}" class=""><button type="button" class="btn btn-outline-info">Modify account</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-group text-center mb-2 mt-2 fw-bolder">
+
+                        {% set userStatus = app.user|user_stats %}
+
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Following</span><br>
+                                        <span>{{userStatus.following}}</span>
+                                    </a>
+                                </div>
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Followers</span><br>
+                                        <span>{{userStatus.followers}}</span>
+                                    </a>
+                                </div>
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Publications</span><br>
+                                        <span>{{userStatus.publications}}</span>
+                                    </a>
+                                </div>
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Likes</span><br>
+                                        <span>{{userStatus.likes}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                </div>
+            </div>
                     {% for publication in pagination %}
                         <div class="card border-top-0 publication-item">
                             <div class="row">
@@ -50,7 +87,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">
-                                        <a href="{{path('profile', {'nickname': publication.user_id})}}" class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a class="text-decoration-none text-dark" style="font-weight:500">
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -
@@ -103,35 +140,31 @@
                                         
                                         <p class="card-text">{{ publication.text }}</p>
                                         
-                                        {# Si la publicacion tiene img subida #}
-                                        {% if publication.image is defined and publication.image != 'empty' %}
-                                            <div class="d-block">
-                                                <img src="{{ asset("img/"~publication.image) }}" class="img-fluid mt-2" alt="img failed">
-                                            </div>
+                                        {# Si la publicacion tiene user_id y es la misma que el usuario logueado boton borrar #}
+                                        {% if (publication.user_id is defined) and (publication.user_id == app.user.id) %}
+                                            <button data-id="{{publication.id}}" class="btn btn-delete-pub p-0" aria-hidden="true">  
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                </svg>
+                                            </button>
                                         {% endif %}
-                                        <div>
-                                        {# Si la publicacion tiene documento subido #}
+
                                         {% if publication.document is defined and publication.document != null %}
-                                            <div class="d-inline">
+                                            
                                                 <a href="{{ asset("document/"~publication.document) }}" class="text-decoration-none p-0" target="_blank">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
                                                         <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
                                                     </svg>
                                                 </a>
-                                            </div>
+
+                                        {% endif %}
+                                        
+                                        {% if publication.image is defined and publication.image != 'empty' %}
+                                            
+                                            <img src="{{ asset("img/"~publication.image) }}" class="img-fluid mt-2" alt="img failed">
+
                                         {% endif %}
 
-                                        {# Si la publicacion tiene user_id y es la misma que el usuario logueado boton borrar #}
-                                        {% if (publication.user_id is defined) and (publication.user_id == app.user.id) %}
-                                            <div class="d-inline">
-                                                <button data-id="{{publication.id}}" class="btn btn-delete-pub align-baseline p-0" aria-hidden="true">  
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        {% endif %}
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -140,75 +173,7 @@
                     <div class="d-flex justify-content-center">
                         <div id="spinner1" class="spinner mx-auto text-center"><img src="{{ asset("img/loader.gif") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;"></div>
                     </div>
-                </div>
                 <div class="no-more text-center">No more publications</div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card mb-3 border-secondary">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card-body">
-                            {% if app.user.image == null %}
-
-                            <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle" style="width:6em; height:6em;">
-
-                            {% else %}
-
-                            <img src="{{ asset("img/"~app.user.image) }}" alt="" class="rounded-circle" style="width:6em; height:6em;">
-
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <a href="{{ path('profile')}}" class="card-title text-decoration-none fw-bolder h4">{{app.user.nick}}</a>
-                            <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
-                            <p class="card-text"><small class="text-muted">Last update 3 mins ago</small></p>
-                        </div>
-                    </div>
-                    <div class="card-group text-center mb-2 mt-2 fw-bolder">
-
-                        {% set userStatus = app.user|user_stats %}
-
-                                <div class="card border-0">
-                                    <a href="#" class="text-decoration-none">
-                                        <span>Following</span><br>
-                                        <span>{{userStatus.following}}</span>
-                                    </a>
-                                </div>
-                                <div class="card border-0">
-                                    <a href="#" class="text-decoration-none">
-                                        <span>Followers</span><br>
-                                        <span>{{userStatus.followers}}</span>
-                                    </a>
-                                </div>
-                                <div class="card border-0">
-                                    <a href="#" class="text-decoration-none">
-                                        <span>Publications</span><br>
-                                        <span>{{userStatus.publications}}</span>
-                                    </a>
-                                </div>
-                                <div class="card border-0">
-                                    <a href="#" class="text-decoration-none">
-                                        <span>Likes</span><br>
-                                        <span>{{userStatus.likes}}</span>
-                                    </a>
-                                </div>
-                            </div>
-                </div>
-            </div>
-            <div class="card border-secondary mb-3">
-                <div class="card-body text-secondary">
-                    <h5 class="card-title">Create {{title}}</h5>
-                    {{ form_start(form) }} 
-                    {{ form_widget(form) }}
-                    {{ form_end(form) }}
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row"> 
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}
