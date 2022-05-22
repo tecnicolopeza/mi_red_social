@@ -15,6 +15,62 @@
                 <h1 class="display-4 text-center">{{title}}</h1>
             </div>
         </div>           
+        <div class="card mb-3 border-secondary p-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-body">
+                            {% if app.user.image == null %}
+
+                            <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
+
+                            {% else %}
+
+                            <img src="{{ asset("img/"~app.user.image) }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
+
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{app.user.nick}}</h5>
+                            <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
+                            <p class="card-text">{{app.user.bio}}</p>
+                            <div class="d-flex flex-row-reverse p-3">
+                                <a href="{{ path('account')}}" class=""><button type="button" class="btn btn-outline-info">Modify account</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-group text-center mb-2 mt-2 fw-bolder">
+
+                        {% set userStatus = app.user|user_stats %}
+
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Following</span><br>
+                                        <span>{{userStatus.following}}</span>
+                                    </a>
+                                </div>
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Followers</span><br>
+                                        <span>{{userStatus.followers}}</span>
+                                    </a>
+                                </div>
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Publications</span><br>
+                                        <span>{{userStatus.publications}}</span>
+                                    </a>
+                                </div>
+                                <div class="card border-0">
+                                    <a href="#" class="text-decoration-none">
+                                        <span>Likes</span><br>
+                                        <span>{{userStatus.likes}}</span>
+                                    </a>
+                                </div>
+                            </div>
+                </div>
+            </div>
                     {% for publication in pagination %}
                         <div class="card border-top-0 publication-item">
                             <div class="row">

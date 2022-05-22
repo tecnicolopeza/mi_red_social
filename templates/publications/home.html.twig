@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">
-                                        <a class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a href="{{path('profile', {'nickname': publication.user_id})}}" class="text-decoration-none text-dark" style="font-weight:500">
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -
@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{app.user.nick}}</h5>
+                            <a href="{{ path('profile')}}" class="card-title text-decoration-none fw-bolder h4">{{app.user.nick}}</a>
                             <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
                             <p class="card-text"><small class="text-muted">Last update 3 mins ago</small></p>
                         </div>
