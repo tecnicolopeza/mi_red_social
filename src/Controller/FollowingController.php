@@ -80,7 +80,7 @@ class FollowingController extends AbstractController
             //consulta para obtener los seguidos por el usuario
             $query = $repository->createQueryBuilder('f')
             ->orderBy('f.id','ASC')
-            ->where('f.user_id == '.$userId)->getQuery();
+            ->where('f.user_id = '.$userId)->getQuery();
 
             // $emUser = $doctrine->getManager();
             // $repositoryUser = $emUser->getRepository(User::class);
