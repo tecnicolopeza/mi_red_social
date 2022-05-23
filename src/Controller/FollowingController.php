@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Following;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class FollowingController extends AbstractController
 {
@@ -65,4 +67,27 @@ class FollowingController extends AbstractController
 
         return new Response($msg);
     }
+
+        // usuarios que esta siguiendo
+        #[Route('/following', name: 'following')]
+        public function following(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+        {
+    
+            $em = $doctrine->getManager();
+            $repository = $em->getRepository(Following::class);
+            $user = $this->getUser();
+            $query = $repository->createQueryBuilder('p')
+            ->orderBy('p.id','ASC')
+            ->where('p.user_id == 10')
+            ->getQuery();
+            $users = $paginator->paginate(
+                $query,
+                $request->query->getInt('page',1),
+                5
+            );
+    
+            return $this->render('user/following.html.twig', [
+                'title' => 'Following', 'users' => $users
+            ]);
+        }
 }

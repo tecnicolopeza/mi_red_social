@@ -173,7 +173,7 @@
                         {% set userStatus = app.user|user_stats %}
 
                                 <div class="card border-0">
-                                    <a href="#" class="text-decoration-none">
+                                    <a href="{{ path('following')}}" class="text-decoration-none">
                                         <span>Following</span><br>
                                         <span>{{userStatus.following}}</span>
                                     </a>

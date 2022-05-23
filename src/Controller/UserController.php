@@ -129,6 +129,8 @@ class UserController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/search', name: 'search')]
     public function userSearch(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
     {
@@ -154,8 +156,6 @@ class UserController extends AbstractController
             'title' => 'People', 'users' => $users
         ]);
     }
-
-
 
 
     #[Route('/register', name: 'register')]
