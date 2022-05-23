@@ -75,4 +75,19 @@ class FollowingRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findFollowing($user){
+        
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+                SELECT * FROM following f WHERE f.user_id = :user 
+                ORDER BY f.id DESC;
+                ';
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user'=>$user]);
+
+        return $resultSet->fetchAll();
+    }
 }

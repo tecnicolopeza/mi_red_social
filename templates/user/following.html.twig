@@ -22,26 +22,35 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="display-4 text-center">{{title}}</h1>
+            {% if type == 'following' %}
+                <h1 class="display-4 text-center">Gente que está siguiendo {{profile_user.nick}}</h1>
+            {% else %}
+                <h1 class="display-4 text-center">Seguidores de {{profile_user.nick}}</h1>
+            {% endif %}
         </div>
     </div>
-
+{# 
     <div class="row">
         <div class="col-md-12">
             <button class="btn btn-dark btn-sm">
                 All the people <span class="badge badge-light">{{ users.getTotalItemCount }}</span>
             </button>
         </div>
-    </div>
+    </div> #}
 
     <div class="row content-users">   
-        {% for following in users %}
+        {% for follow in users %}
+            {% if type == 'following' %}
+                {% set user = follow.followed_id %}
+            {% else %}
+                {% set user = follow.user_id %}
+            {% endif %}
         <div class="col-md-12 user-item">
             <hr>
             {% if user.image == null %}
                     <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
             {% else %}
-                    <img src="{{ asset("img/"~user.image) }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
+                    <img src="{{ asset("img/"~profile_user.image) }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
             {% endif %}
             <span class="d-inline-block">
                 <span class="mx-2">{{user.name}} {{user.surname}}</span>
@@ -50,7 +59,7 @@
                 <span class="mx-2">{{user.bio}}</span>
             </span>
 
-            {% if app.user.id != user.id %}
+            {# {% if app.user.id != user.id %}
                 <div class="float-end">
                     <button type="button" class="btn btn-dark btn-sm btn-follow
                     
@@ -75,7 +84,7 @@
                     data-btn-unfollow="{{user.id}}">Unfollow</button>
 
                 </div>
-            {% endif %}
+            {% endif %} #}
             <hr>
             
         </div>

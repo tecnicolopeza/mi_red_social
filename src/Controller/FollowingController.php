@@ -74,29 +74,31 @@ class FollowingController extends AbstractController
         {
     
             $em = $doctrine->getManager();
-            $repository = $em->getRepository(Following::class);
-            $userId = $this->getUser()->getId();
+            $nickname = $request->get('nick');
 
-            //consulta para obtener los seguidos por el usuario
-            $query = $repository->createQueryBuilder('f')
-            ->orderBy('f.id','ASC')
-            ->where('f.user_id = '.$userId)->getQuery();
+            if($nickname != null){
+                $repository = $em->getRepository(User::class);
+                $user = $repository->findOneBy(array("nick" => $nickname));
+            }else{
+                $user = $this->getUser();
+            }
 
-            // $emUser = $doctrine->getManager();
-            // $repositoryUser = $emUser->getRepository(User::class);
+            if(empty($user) || !is_object($user)){
+                return $this->redirectToRoute('home');
+            }
 
-            // $query2 = $repositoryUser->createQueryBuilder('u')
-            // ->orderBy('u.id','ASC')
-            // ->where('u.id == '.$userId)->getQuery();
+            $repositoryFollowing = $em->getRepository(Following::class);
+
+            $following = $repositoryFollowing->findFollowing($this->getUser()->getId());
 
             $users = $paginator->paginate(
-                $query,
+                $following,
                 $request->query->getInt('page',1),
                 5
             );
     
             return $this->render('user/following.html.twig', [
-                'title' => 'Following', 'users' => $users
+                'title' => 'Following', 'type' => 'following', 'users' => $users, 'profile_user' => $user
             ]);
         }
 }
