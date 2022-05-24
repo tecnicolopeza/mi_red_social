@@ -22,11 +22,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-            {% if type == 'following' %}
                 <h1 class="display-4 text-center">Gente que está siguiendo {{profile_user.nick}}</h1>
-            {% else %}
-                <h1 class="display-4 text-center">Seguidores de {{profile_user.nick}}</h1>
-            {% endif %}
         </div>
     </div>
 {# 
@@ -55,7 +51,7 @@
                 <span class="mx-2">{{user.bio}}</span>
             </span>
 
-            {# {% if app.user.id != user.id %}
+            {% if app.user.id != user.id %}
                 <div class="float-end">
                     <button type="button" class="btn btn-dark btn-sm btn-follow
                     
@@ -80,7 +76,7 @@
                     data-btn-unfollow="{{user.id}}">Unfollow</button>
 
                 </div>
-            {% endif %} #}
+            {% endif %}
             <hr>
             
         </div>

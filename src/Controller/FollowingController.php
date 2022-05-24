@@ -100,7 +100,7 @@ class FollowingController extends AbstractController
             );
     
             return $this->render('user/following.html.twig', [
-                'title' => 'Following', 'type' => 'following', 'users' => $users, 'profile_user' => $user
+                'title' => 'Following', 'users' => $users, 'profile_user' => $user
             ]);
         }
 }
