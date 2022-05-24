@@ -81,8 +81,8 @@ class FollowingRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-                SELECT * FROM following f WHERE f.user_id = :user 
-                ORDER BY f.id DESC;
+                SELECT * FROM user u WHERE u.id IN (SELECT followed_id FROM following f
+                 WHERE f.user_id = :user) ORDER BY u.id DESC;
                 ';
         
         $stmt = $conn->prepare($sql);

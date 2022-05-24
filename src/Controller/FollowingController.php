@@ -89,7 +89,9 @@ class FollowingController extends AbstractController
 
             $repositoryFollowing = $em->getRepository(Following::class);
 
-            $following = $repositoryFollowing->findFollowing($this->getUser()->getId());
+            $user_id = $user->getId();
+
+            $following = $repositoryFollowing->findFollowing($user_id);
 
             $users = $paginator->paginate(
                 $following,

@@ -39,12 +39,8 @@
     </div> #}
 
     <div class="row content-users">   
-        {% for follow in users %}
-            {% if type == 'following' %}
-                {% set user = follow.followed_id %}
-            {% else %}
-                {% set user = follow.user_id %}
-            {% endif %}
+        {% for user in users %}
+            
         <div class="col-md-12 user-item">
             <hr>
             {% if user.image == null %}
