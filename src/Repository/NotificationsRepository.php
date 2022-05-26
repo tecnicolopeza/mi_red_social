@@ -75,4 +75,19 @@ class NotificationsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findNotification($user){
+        
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+                SELECT * FROM notifications n WHERE n.user_id = :user
+                 ORDER BY n.id DESC;
+                ';
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user'=>$user]);
+
+        return $resultSet->fetchAll();
+    }
 }

@@ -10,12 +10,12 @@ use App\Entity\User;
 use App\Entity\Following;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
-
+use App\Services\NotificationService;
 
 class FollowingController extends AbstractController
 {
     #[Route('/follow', name: 'follow', methods:['POST'])] #metodo POST para follow y unfollow
-    public function follow(Request $request, PersistenceManagerRegistry $doctrine): Response
+    public function follow(Request $request, PersistenceManagerRegistry $doctrine, NotificationService $notificationService): Response
     {
         $user = $this->getUser();
         $followed_id = $request->get('followed');
@@ -34,6 +34,7 @@ class FollowingController extends AbstractController
         $flush = $entityManager->flush();
 
         if ($flush == null){
+            $notificationService->set($followed, 'follow', $user->getId());
             $msg = 'Now you are following this user.';
         }else{
             $msg = 'Request failed, please try later.';

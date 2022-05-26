@@ -11,11 +11,12 @@ use App\Entity\Publications;
 use App\Entity\Likes;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Services\NotificationService;
 
 class LikeController extends AbstractController
 {
     #[Route('/like', name: 'like', methods:['POST'])] #metodo POST para like
-    public function like(Request $request, PersistenceManagerRegistry $doctrine): Response
+    public function like(Request $request, PersistenceManagerRegistry $doctrine, NotificationService $notificationService): Response
     {
         $user = $this->getUser();
         $publication_id = $request->get('publication');
@@ -34,6 +35,7 @@ class LikeController extends AbstractController
         $flush = $entityManager->flush();
 
         if ($flush == null){
+            $notificationService->set($publication->getUser(), 'like', $user->getId(), $publication->getId());
             $msg = 'Now you are like this publication.';
         }else{
             $msg = 'Request failed, please try later.';
