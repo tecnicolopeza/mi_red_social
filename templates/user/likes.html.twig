@@ -1,85 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{title}}{% endblock %}
-
 {% block javascripts %}
 {{ parent() }}
 <script src="{{ asset('js/publications.js')}}"></script>
 {% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+    <style>
+    .no-more{
+        opacity:0;
+    }
+    </style>
+{% endblock %}
+
+{% block title %}{{title}}{% endblock %}
+
 {% block body %}
 <body>
-    <div class="container mt-4 content-publications">    
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="display-4 text-center">{{title}}</h1>
-            </div>
-        </div>           
-        <div class="card mb-3 border-secondary p-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card-body">
-                        {# FOTO PERFIL USUARIO #}
-                            {% if app.user.image == null %}
+<div class="container mt-4">
+    <h1 class="box-header">Publicaciones que le gustan a {{user.nick}}</h1>
 
-                            <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
+    <div class="count m-3">
+        <span class="badge bg-secondary">
+            Total de publicaciones: {{pagination.getTotalItemCount}}
+        </span>
+    </div>
 
-                            {% else %}
+    <div class="row">
 
-                            <img src="{{ asset("img/"~app.user.image) }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
-
-                            {% endif %}
-                        </div>
-                    </div>
-                    {# DATOS PERFIL USUARIO #}
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{app.user.nick}}</h5>
-                            <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
-                            <p class="card-text">{{app.user.bio}}</p>
-                            <div class="d-flex flex-row-reverse p-3">
-                                <a href="{{ path('account')}}" class=""><button type="button" class="btn btn-outline-info">Modify account</button></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-group text-center mb-2 mt-2 fw-bolder">
-                        
-                        {# STATS DE USUARIO #}
-                        {% set userStatus = app.user|user_stats %}
-
-                                <div class="card border-0">
-                                    <a href="{{ path('following')}}" class="text-decoration-none">
-                                        <span>Following</span><br>
-                                        <span>{{userStatus.following}}</span>
-                                    </a>
-                                </div>
-                                <div class="card border-0">
-                                    <a href="{{ path('followed')}}" class="text-decoration-none">
-                                        <span>Followers</span><br>
-                                        <span>{{userStatus.followers}}</span>
-                                    </a>
-                                </div>
-                                <div class="card border-0">
-                                    <a href="{{ path('profile')}}" class="text-decoration-none">
-                                        <span>Publications</span><br>
-                                        <span>{{userStatus.publications}}</span>
-                                    </a>
-                                </div>
-                                <div class="card border-0">
-                                    <a href="{{ path('likesAction')}}" class="text-decoration-none">
-                                        <span>Likes</span><br>
-                                        <span>{{userStatus.likes}}</span>
-                                    </a>
-                                </div>
-                            </div>
-                </div>
-            </div>
-
+        <div class="col-md-12">
+            <div class="card border-secondary mb-3" style="min-height:40em">
+                <div class="card-header bg-transparent text-dark mb-3">Timeline</div>
+                <div class="card-body text-secondary p-0 content-publications">
+                    
                     {% for publication in pagination %}
                         <div class="card border-top-0 publication-item">
                             <div class="row">
-                                {# CARD PUBLICACION #}
                                 <div class="col-md-2">
                                     {% if publication.user_id|userById.image == null %}
 
@@ -92,9 +49,8 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-md-10">
-
                                     <div class="card-body">
-                                        <a class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a href="{{path('profile', {'nickname': publication.user_id})}}" class="text-decoration-none text-dark" style="font-weight:500">
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -
@@ -176,16 +132,19 @@
                                             </div>
                                         {% endif %}
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
-                    
                     <div class="d-flex justify-content-center">
                         <div id="spinner1" class="spinner mx-auto text-center"><img src="{{ asset("img/loader.gif") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;"></div>
                     </div>
-
-    <div class="no-more text-center">No more publications</div>
+                </div>
+                <div class="no-more text-center">No more publications</div>
+            </div>
+        </div>
+    </div>
     <div class="row"> 
             <div class="navigation">
                 {{ knp_pagination_render(pagination) }}

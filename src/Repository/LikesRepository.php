@@ -75,4 +75,21 @@ class LikesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // consulta para las publicaciones a las que has dado like
+    public function findLikes($user){
+        
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+                SELECT * FROM publications p WHERE p.id IN (SELECT publication_id FROM likes l
+                 WHERE l.user_id = :user) ORDER BY p.id DESC;
+                ';
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user'=>$user]);
+
+        return $resultSet->fetchAll();
+    }
+
 }

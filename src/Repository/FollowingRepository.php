@@ -75,7 +75,7 @@ class FollowingRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    // consulta para las personas a las que sigues
     public function findFollowing($user){
         
         $conn = $this->getEntityManager()->getConnection();
@@ -83,6 +83,22 @@ class FollowingRepository extends ServiceEntityRepository
         $sql = '
                 SELECT * FROM user u WHERE u.id IN (SELECT followed_id FROM following f
                  WHERE f.user_id = :user) ORDER BY u.id DESC;
+                ';
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user'=>$user]);
+
+        return $resultSet->fetchAll();
+    }
+
+    // consulta para las personas que te siguen
+    public function findFollowed($user){
+        
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+                SELECT * FROM user u WHERE u.id IN (SELECT user_id FROM following f
+                 WHERE f.followed_id = :user) ORDER BY u.id DESC;
                 ';
         
         $stmt = $conn->prepare($sql);

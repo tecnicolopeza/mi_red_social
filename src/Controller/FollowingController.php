@@ -103,4 +103,40 @@ class FollowingController extends AbstractController
                 'title' => 'Following', 'users' => $users, 'profile_user' => $user
             ]);
         }
+
+        // usuarios que le siguen
+        #[Route('/followed', name: 'followed')]
+        public function followed(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+        {
+    
+            $em = $doctrine->getManager();
+            $nickname = $request->get('nick');
+
+            if($nickname != null){
+                $repository = $em->getRepository(User::class);
+                $user = $repository->findOneBy(array("nick" => $nickname));
+            }else{
+                $user = $this->getUser();
+            }
+
+            if(empty($user) || !is_object($user)){
+                return $this->redirectToRoute('home');
+            }
+
+            $repositoryFollowing = $em->getRepository(Following::class);
+
+            $user_id = $user->getId();
+
+            $following = $repositoryFollowing->findFollowed($user_id);
+
+            $users = $paginator->paginate(
+                $following,
+                $request->query->getInt('page',1),
+                5
+            );
+    
+            return $this->render('user/followed.html.twig', [
+                'title' => 'Followed', 'users' => $users, 'profile_user' => $user
+            ]);
+        }
 }

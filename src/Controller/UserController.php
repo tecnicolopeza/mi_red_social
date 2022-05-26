@@ -238,7 +238,7 @@ class UserController extends AbstractController
 
         $user_id = $user->getId();
 
-        $publications = $repositoryPublication->findUserPublications($this->getUser()->getId());
+        $publications = $repositoryPublication->findUserPublications($user_id);
 
         
         $pagination = $paginator->paginate(
