@@ -22,6 +22,8 @@ class NotificationController extends AbstractController
         $user = $this->getUser();
         $repositoryNotification = $em->getRepository(Notifications::class);
 
+        //$count = $repositoryNotification->count(); //numero de notificaciones
+
         $user_id = $user->getId();
 
         $notification = $repositoryNotification->findNotification($user_id);
@@ -35,6 +37,7 @@ class NotificationController extends AbstractController
         return $this->render('user/notification.html.twig', [
             'title' => 'Notifications',
             'user' => $user,
+            // 'count' => $count,
             'pagination' => $notifications
         ]);
     }

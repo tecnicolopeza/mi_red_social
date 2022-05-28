@@ -107,4 +107,12 @@ class Notifications
 
         return $this;
     }
+
+    public function count()
+    {
+        // return $repository->createQueryBuilder('u')
+        // ->select('count(u.id)')
+        // ->getQuery()
+        // ->getSingleScalarResult();
+    }
 }
