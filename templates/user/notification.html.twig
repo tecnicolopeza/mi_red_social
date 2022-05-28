@@ -31,12 +31,21 @@
                     {% for notification in pagination %}
                         <div class="card border-top-0 publication-item">
                             <div class="alert alert-default">
+
+                                {% set notu = notification.type_id|get_user %}
+
                                 {% if notification.type_not == "follow" %}
-                                    x usuario te está siguiendo.
+                                    <a href="{{ path("profile",{'nickname':notu.nick})}}">
+                                        {{notu.name}} {{notu.surname}}
+                                    </a>
+                                     te está siguiendo.
                                 {% endif %}
 
                                 {% if notification.type_not == "like" %}
-                                    x usuario le ha dado me gusta a una de tus publicaciones.
+                                    <a href="{{ path("profile",{'nickname':notu.nick})}}">
+                                        {{notu.name}} {{notu.surname}}
+                                    </a>
+                                     le ha dado me gusta a una de tus publicaciones.
                                 {% endif %}
                             </div>
                         </div>
