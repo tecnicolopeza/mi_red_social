@@ -35,4 +35,29 @@ namespace App\Services;
         return $status;
 
      }
+
+     // Cambiamos la notificacion a leída
+     public function read($user){
+
+        $em = $this->doctrine->getManager();
+
+        $notifications_repo = $em->getRepository(Notifications::class);
+        $notifications = $notifications_repo->findBy(array('user' => $user));
+
+        foreach($notifications as $notification){
+            $notification->setReaded(1);
+
+            $em->persist($notification);
+        }
+        $flush = $em->flush();
+
+        if($flush == null){
+            return true;
+        }else{
+            return false;
+        }
+
+        return true;
+
+     }
  }
