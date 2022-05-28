@@ -15,7 +15,7 @@ class NotificationController extends AbstractController
 {
 
     #[Route('/notification', name: 'notification')]
-    public function notification(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine){
+    public function notification(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine, NotificationService $notificationService){
 
         $em = $doctrine->getManager();
 
@@ -34,11 +34,28 @@ class NotificationController extends AbstractController
             5
         );
 
+        $notificationService->read($user);
+
         return $this->render('user/notification.html.twig', [
             'title' => 'Notifications',
             'user' => $user,
             // 'count' => $count,
             'pagination' => $notifications
         ]);
+    }
+
+    #[Route('/notifications/get', name: 'notifications')]
+    public function countNotificationAction(PersistenceManagerRegistry $doctrine){
+
+        $em = $doctrine->getManager();
+        $repositoryNotification = $em->getRepository(Notifications::class);
+
+        $notifications = $repositoryNotification->findBy(array(
+            'user' => $this->getUser(),
+            'readed' => 0
+        ));
+
+        return new Response(count($notifications));
+
     }
 }
