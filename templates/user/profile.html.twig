@@ -20,13 +20,13 @@
                     <div class="col-md-4">
                         <div class="card-body">
                         {# FOTO PERFIL USUARIO #}
-                            {% if app.user.image == null %}
+                            {% if user.image == null %}
 
                             <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
 
                             {% else %}
 
-                            <img src="{{ asset("img/"~app.user.image) }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
+                            <img src="{{ asset("img/"~user.image) }}" alt="" class="rounded-circle" style="width:10em; height:10em;">
 
                             {% endif %}
                         </div>
@@ -34,9 +34,9 @@
                     {# DATOS PERFIL USUARIO #}
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{app.user.nick}}</h5>
-                            <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
-                            <p class="card-text">{{app.user.bio}}</p>
+                            <h5 class="card-title">{{user.nick}}</h5>
+                            <p class="card-text">{{user.name}} {{user.surname}}</p>
+                            <p class="card-text">{{user.bio}}</p>
                             <div class="d-flex flex-row-reverse p-3">
                                 <a href="{{ path('account')}}" class=""><button type="button" class="btn btn-outline-info">Modify account</button></a>
                             </div>
@@ -46,28 +46,28 @@
                     <div class="card-group text-center mb-2 mt-2 fw-bolder">
                         
                         {# STATS DE USUARIO #}
-                        {% set userStatus = app.user|user_stats %}
+                        {% set userStatus = user|user_stats %}
 
                                 <div class="card border-0">
-                                    <a href="{{ path('following')}}" class="text-decoration-none">
+                                    <a href="{{ path('following', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Following</span><br>
                                         <span>{{userStatus.following}}</span>
                                     </a>
                                 </div>
                                 <div class="card border-0">
-                                    <a href="{{ path('followed')}}" class="text-decoration-none">
+                                    <a href="{{ path('followed', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Followers</span><br>
                                         <span>{{userStatus.followers}}</span>
                                     </a>
                                 </div>
                                 <div class="card border-0">
-                                    <a href="{{ path('profile')}}" class="text-decoration-none">
+                                    <a href="{{path('profile', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Publications</span><br>
                                         <span>{{userStatus.publications}}</span>
                                     </a>
                                 </div>
                                 <div class="card border-0">
-                                    <a href="{{ path('likesAction')}}" class="text-decoration-none">
+                                    <a href="{{ path('likesAction', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Likes</span><br>
                                         <span>{{userStatus.likes}}</span>
                                     </a>
@@ -94,7 +94,7 @@
                                 <div class="col-md-10">
 
                                     <div class="card-body">
-                                        <a class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a href="{{path('profile', {'nickname': publication.user_id|userById.nick})}}" class="text-decoration-none text-dark" style="font-weight:500">
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -

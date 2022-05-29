@@ -25,14 +25,12 @@
                 <h1 class="display-4 text-center">Gente que sigue a {{profile_user.nick}}</h1>
         </div>
     </div>
-{# 
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn btn-dark btn-sm">
-                All the people <span class="badge badge-light">{{ users.getTotalItemCount }}</span>
-            </button>
-        </div>
-    </div> #}
+
+    <div class="count m-3">
+        <span class="badge bg-secondary">
+            Total de usuarios: {{users.getTotalItemCount}}
+        </span>
+    </div>
 
     <div class="row content-users">   
         {% for user in users %}
@@ -42,10 +40,12 @@
             {% if user.image == null %}
                     <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
             {% else %}
-                    <img src="{{ asset("img/"~profile_user.image) }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
+                    <img src="{{ asset("img/"~user.image) }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
             {% endif %}
             <span class="d-inline-block">
-                <span class="mx-2">{{user.name}} {{user.surname}}</span>
+                <span class="mx-2">
+                    <a href="{{path('profile', {'nickname': user.id|userById.nick})}}" >{{user.name}} {{user.surname}}</a>
+                </span>
                 <span class="mx-2">{{user.nick}}</span>
                 <br>
                 <span class="mx-2">{{user.bio}}</span>

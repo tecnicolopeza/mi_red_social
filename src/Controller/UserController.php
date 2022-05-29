@@ -217,11 +217,11 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/profile', name: 'profile')]
-    public function profileAction(Request $request, PersistenceManagerRegistry $doctrine, PaginatorInterface $paginator){
+    #[Route('/profile/{nickname}', name: 'profile')]
+    public function profileAction(Request $request, $nickname = null, PersistenceManagerRegistry $doctrine, PaginatorInterface $paginator){
 
         $em = $doctrine->getManager();
-        $nickname = $request->get('nick');
+        // $nickname = $request->get('nick');
 
         if($nickname != null){
             $repository = $em->getRepository(User::class);
@@ -248,7 +248,7 @@ class UserController extends AbstractController
         );
 
         return $this->render('user/profile.html.twig', [
-            'title' => 'Profile', 'pagination' => $pagination
+            'title' => 'Profile', 'user' => $user, 'pagination' => $pagination
         ]);
     }
 }
