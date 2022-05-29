@@ -79,7 +79,7 @@
     </symbol>
 </svg>
     
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar" style="width: 280px; ">
+<div class="col d-flex flex-column p-3 text-white bg-dark sidebar sticky-top" style="max-width: 280px;">
     <a href="{{ path('home') }}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         {# <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> #}
         <span class="fs-4">OtakuRoom</span>
@@ -111,10 +111,10 @@
         {# Sino está logueado #}
         {% if not app.user %}
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ path('login') }}">Login</a>
+                <a class="nav-link text-white" aria-current="page" href="{{ path('login') }}">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('register') }}">Register</a>
+                <a class="nav-link text-white" href="{{ path('register') }}">Register</a>
             </li>
         {% endif %}
 
@@ -144,7 +144,7 @@
                 </a>
             </li>
         </ul>
-        <div class="dropdown ">
+        <div class="dropdown profile-div">
                 {# <hr class="dropdown-divider"> #}
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle profile-menu" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 {% if app.user.image == null %}

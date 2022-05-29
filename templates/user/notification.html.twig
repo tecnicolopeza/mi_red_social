@@ -18,6 +18,7 @@
 
 {% block body %}
 <body>
+<div class="col">
 <div class="container mt-4">
     <h1 class="box-header">Notificaciones de {{user.nick}}</h1>
 
@@ -64,6 +65,7 @@
                 {{ knp_pagination_render(pagination) }}
             </div>
     </div>
+</div>
 </div>
 </body>
 {% endblock %}
