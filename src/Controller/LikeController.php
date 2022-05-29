@@ -71,12 +71,12 @@ class LikeController extends AbstractController
     }
 
     // Publicaciones a las que has dado me gusta
-    #[Route('/likesAction', name: 'likesAction')]
-        public function likesAction(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+    #[Route('/likesAction/{nickname}', name: 'likesAction')]
+        public function likesAction(Request $request, $nickname = null, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
         {
     
             $em = $doctrine->getManager();
-            $nickname = $request->get('nick');
+            // $nickname = $request->get('nick');
 
             if($nickname != null){
                 $repository = $em->getRepository(User::class);

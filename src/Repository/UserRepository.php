@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Following;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
@@ -107,4 +108,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    public function getFollowingUsers($user){
+
+        $em = $this->getEntityManager();
+        $following_repo = $em->getRepository(Following::class);
+        $following = $following_repo->findBy(array('user' => $user));
+
+        $following_array = array();
+        foreach ($following as $follow) {
+            $following_array[] = $follow->getFollowed();
+        }
+
+        $user_repo = $em->getRepository(User::class);
+        $users = $user_repo->createQueryBuilder('u')
+                ->where("u.id != :user AND u.id IN (:following)")
+                ->setParameter('user', $user->getId())
+                ->setParameter('following', $following_array)
+                ->orderBy('u.id', 'DESC');
+
+        return $users;
+
+    }
 }

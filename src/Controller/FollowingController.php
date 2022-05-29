@@ -70,12 +70,12 @@ class FollowingController extends AbstractController
     }
 
         // usuarios que esta siguiendo
-        #[Route('/following', name: 'following')]
-        public function following(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+        #[Route('/following/{nickname}', name: 'following')]
+        public function following(Request $request, $nickname = null, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
         {
     
             $em = $doctrine->getManager();
-            $nickname = $request->get('nick');
+            // $nickname = $request->get('nick');
 
             if($nickname != null){
                 $repository = $em->getRepository(User::class);
@@ -101,17 +101,17 @@ class FollowingController extends AbstractController
             );
     
             return $this->render('user/following.html.twig', [
-                'title' => 'Following', 'users' => $users, 'profile_user' => $user
+                'title' => 'Following', 'pagination' => $users, 'profile_user' => $user
             ]);
         }
 
         // usuarios que le siguen
-        #[Route('/followed', name: 'followed')]
-        public function followed(Request $request, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
+        #[Route('/followed/{nickname}', name: 'followed')]
+        public function followed(Request $request, $nickname = null, PaginatorInterface $paginator, PersistenceManagerRegistry $doctrine)
         {
     
             $em = $doctrine->getManager();
-            $nickname = $request->get('nick');
+            // $nickname = $request->get('nick');
 
             if($nickname != null){
                 $repository = $em->getRepository(User::class);

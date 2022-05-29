@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">
-                                        <a href="{{path('profile', {'nickname': publication.user_id})}}" class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a href="{{path('profile', {'nickname': publication.user_id|userById.nick})}}" class="text-decoration-none text-dark" style="font-weight:500">
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -

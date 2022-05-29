@@ -45,7 +45,9 @@
                     <img src="{{ asset("img/"~user.image) }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;">
             {% endif %}
             <span class="d-inline-block">
-                <span class="mx-2">{{user.name}} {{user.surname}}</span>
+                <span class="mx-2">
+                    <a href="{{path('profile', {'nickname': user.id|userById.nick})}}" >{{user.name}} {{user.surname}}</a>
+                </span>
                 <span class="mx-2">{{user.nick}}</span>
                 <br>
                 <span class="mx-2">{{user.bio}}</span>

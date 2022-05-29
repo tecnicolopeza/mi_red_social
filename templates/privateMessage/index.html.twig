@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message Private{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-lg-12">
+            <h1 class="display-4 text-center m-2 box-header">Message Private</h1>
+        
+            <div class="col-lg-6">
+                <h4>Send new message private</h4>
+                {{form_start(form,{'action':'', 'method':'POST'})}}
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
