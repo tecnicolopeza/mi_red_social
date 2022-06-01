@@ -29,6 +29,7 @@ class PublicationsController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            //upload image
             $file = $form['image']->getData();
                 
                 if(!empty($file) && $file != null){

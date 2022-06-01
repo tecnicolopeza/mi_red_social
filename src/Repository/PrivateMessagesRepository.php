@@ -75,4 +75,30 @@ class PrivateMessagesRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getPrivateMessages($user_id, $type = null){
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        if($type == "sended"){
+
+            $sql = '
+                SELECT * FROM private_messages p WHERE p.sender_id = :user 
+                ORDER BY p.id DESC;
+                ';
+
+        }else{
+
+            $sql = '
+                SELECT * FROM private_messages p WHERE p.receiver_id = :user 
+                ORDER BY p.id DESC;
+                ';
+
+        }
+        
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['user'=>$user_id]);
+
+        return $resultSet->fetchAll();
+    }
 }

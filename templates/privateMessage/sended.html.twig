@@ -16,17 +16,13 @@
         </div>
         {% endfor %}
 
+            <h1 class="display-4 text-center my-5 box-header">Message Private</h1>
+        
+            {# <div class="row"> #}
+                <a href="{{ path('privateMessage')}}" class="btn btn-warning">View received messages</a>
+            {# </div> #}
 
-        <h1 class="display-4 text-center my-5 box-header">Message Private</h1>
-    
-        <div class="row">
-            <h4>Send new message private</h4>
-            {{form_start(form,{'action':'', 'method':'POST'})}}
-            {{form_end(form)}}
-        </div>
 
-        <br />
-        <a href="{{ path('sended')}}" class="btn btn-warning">View sent messages</a>
     </div>
 </div>
 {% endblock %}
