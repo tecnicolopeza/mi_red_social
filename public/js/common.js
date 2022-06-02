@@ -7,6 +7,12 @@ $(document).ready(function(){
         $('.label-notifications').css("visibility", "visible");
     }
 
+    if($('.label-notifications-msg').text() == 0){
+        $('.label-notifications-msg').css("visibility", "hidden");
+    }else{
+        $('.label-notifications-msg').css("visibility", "visible");
+    }
+
     notifications();
 
     // Se va a estar recargando cada 1min
@@ -28,6 +34,20 @@ function notifications(){
                 $('.label-notifications').css("visibility", "hidden");
             }else{
                 $('.label-notifications').css("visibility", "visible");
+            }
+        }
+    });
+
+    $.ajax({
+        url: '/private-message/notification/get',
+        type: 'GET',
+        success: function(response){
+            $('.label-notifications-msg').html(response);
+
+            if(response == 0){
+                $('.label-notifications-msg').css("visibility", "hidden");
+            }else{
+                $('.label-notifications-msg').css("visibility", "visible");
             }
         }
     });

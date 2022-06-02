@@ -25,7 +25,7 @@ class PrivateMessageController extends AbstractController
     }
 
     #[Route('/privateMessage', name: 'privateMessage')]
-    public function privateMessage(Request $request, PersistenceManagerRegistry $doctrine){
+    public function privateMessage(Request $request, PersistenceManagerRegistry $doctrine, PaginatorInterface $paginator){
 
         $em = $doctrine->getManager();
         $user = $this->getUser();
@@ -91,9 +91,13 @@ class PrivateMessageController extends AbstractController
             return $this->redirectToRoute('privateMessage');
         }
 
+        $private_messages = $this->getPrivateMessages($request, "received", $doctrine, $paginator);
+
+        $this->setReadedAction($user,$doctrine);
 
         return $this->render('privateMessage/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'pagination' => $private_messages
         ]);
     }
 
@@ -121,5 +125,47 @@ class PrivateMessageController extends AbstractController
         );
 
         return $pagination;
+    }
+
+    //Cantidad de mensajes que no han sido leidos
+    #[Route('/private-message/notification/get', name: 'messageNotifications')]
+    public function notReadedAction(PersistenceManagerRegistry $doctrine){
+        $em = $em = $doctrine->getManager();
+        $user = $this->getUser();
+
+        $private_message_repo = $em->getRepository(PrivateMessages::class);
+        $count_not_reader_msg = count($private_message_repo->findBy(array(
+            'receiver' => $user,
+            'readed' => 0
+        )));
+
+        return new Response($count_not_reader_msg);
+    }
+
+    // funcion que marca las notificaciones como leidas
+    private function setReadedAction($user, $doctrine){
+        $em = $em = $doctrine->getManager();
+
+        $private_message_repo = $em->getRepository(PrivateMessages::class);
+        $messages = $private_message_repo->findBy(array(
+            'receiver' => $user,
+            'readed' => 0
+        ));
+
+        //ponemos el readed a 1 para que esten leidos
+        foreach($messages as $msg){
+            $msg->setReaded(1);
+
+            $em->persist($msg);
+        }
+        $flush = $em->flush();
+
+        if($flush == null){
+            $result = true;
+        }else{
+            $result = false;
+        }
+        
+        return $result;
     }
 }

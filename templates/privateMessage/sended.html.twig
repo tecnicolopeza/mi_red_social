@@ -2,6 +2,20 @@
 
 {% block title %}Message Private{% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/publications.js')}}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+    <style>
+    .no-more{
+        opacity:0;
+    }
+    </style>
+{% endblock %}
+
 {% block body %}
 <div class="col">
     
@@ -18,11 +32,86 @@
 
             <h1 class="display-4 text-center my-5 box-header">Message Private</h1>
         
-            {# <div class="row"> #}
-                <a href="{{ path('privateMessage')}}" class="btn btn-warning">View received messages</a>
-            {# </div> #}
+        <div class="row box-default">
+            <div class="col-lg-6">
+                    <a href="{{ path('privateMessage')}}" class="btn btn-warning">View received messages</a>
+            </div>
 
+            <div class="col-lg-6">
+                <h4>Sent messages</h4>
+                <hr />
 
+                <div class="card-body text-secondary p-0 content-publications">                 
+                    {% for message in pagination %}
+                        <div class="card border-top-0 publication-item">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    {% if message.sender_id|userById.image == null %}
+
+                                    <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle m-3" style="width:5em; height:5em;">
+
+                                    {% else %}
+
+                                    <img src="{{ asset("img/"~message.sender_id|userById.image) }}" alt="" class="rounded-circle m-3" style="width:5em; height:5em;">
+
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <a href="{{path('profile', {'nickname': message.sender_id|userById.nick})}}" class="text-decoration-none text-dark" style="font-weight:500">
+                                            {{message.sender_id|userById.nick}}
+                                        </a>
+                                        -
+                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                            {{message.sender_id|userById.name}}
+                                        </a>
+                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                            {{message.sender_id|userById.surname}}
+                                        </a>
+                                        -
+                                        <p class="card-text d-inline-block mb-1">
+                                            <small class="text-muted">{{ message.sender_id|timeAgo }}</small>
+                                        </p>
+                                        
+                                        <p class="card-text">{{ message.message }}</p>
+                                        
+                                        {# Si la publicacion tiene img subida #}
+                                        {% if message.image is defined and message.image != 'empty' %}
+                                            <div class="d-block">
+                                                <img src="{{ asset("messages/img/"~message.image) }}" class="img-fluid mt-2" alt="img failed">
+                                            </div>
+                                        {% endif %}
+                                        <div>
+                                        {# Si la publicacion tiene documento subido #}
+                                        {% if message.file is defined and message.file != null %}
+                                            <div class="d-inline">
+                                                <a href="{{ asset("messages/document/"~message.file) }}" class="text-decoration-none p-0" target="_blank">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center">
+                        <div id="spinner1" class="spinner mx-auto text-center"><img src="{{ asset("img/loader.gif") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;"></div>
+                    </div>
+                </div>
+                <div class="no-more text-center">No more messages</div>
+            </div>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+    </div>
     </div>
 </div>
 {% endblock %}
