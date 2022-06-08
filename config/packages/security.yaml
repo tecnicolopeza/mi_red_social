@@ -45,6 +45,14 @@ security:
         - { path: ^/search, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/follow, roles: [ROLE_USER, ROLE_ADMIN] }
         - { path: ^/unfollow, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/juego, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/people, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/privateMessage, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/notification, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/profile, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/followed, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/following, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/likesAction, roles: [ROLE_USER, ROLE_ADMIN] }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
