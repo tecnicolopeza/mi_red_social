@@ -1,0 +1,58 @@
+{% block head %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="{{ asset('css/juego.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    {% include 'componentsHtml/nav.html.twig' %}
+    <div id="titulos">
+        <h2 class="text-center mt-4">Guess the anime character</h2>
+    </div>
+
+<div class="container">
+<div class="row align-items-start">
+    
+    <div class="col">
+        <h4 class="text-center align-middle">Fallos, respuestas, etc...</h4>
+    </div>
+
+    <main class="col" id="tabla">
+        <h4 class="text-center" id="intentos"></h4>
+        <div class="same-line mx-auto">
+            <h4 class="text-center">Round: <span id="rondas">10</span></h4>
+        </div>
+    </main>
+
+    {# <section id="resultados">
+
+    </section> #}
+    <div class="col mx-auto">
+        <div class="d-flex flex-column justify-content-center mt-5">
+        
+            <div class="d-flex flex-column mt-5 align-items-center">
+                <label for="respuesta" class="form-label"><h4>Character's Name:</h4></label>
+                <input type="text" class="form-control w-75 m-0" name="respuesta" id="respuesta" aria-describedby="name">
+                <button class="btn btn-primary mt-2" onclick="comprobarRespuesta()">Check Name</button>
+            </div>
+
+            <div class="d-flex flex-column mt-5 justify-content-center align-items-center">
+                <h1 class="text-center">Score</h1>
+                <h1 class="text-center" id="puntuacion">0</h1>
+                <button class="btn btn-success w-50 mt-2" onclick="jugar()">Jugar de nuevo</button>
+            </div>
+        </div>
+
+    </div>
+    
+</div>
+
+</div>
+    {% block javascripts %}
+        <script src="{{ asset('js/juego/generarAleatorio.js')}}"></script>
+        <script src="{{ asset('js/juego/generadorTabla.js')}}"></script>
+        <script src="{{ asset('js/juego/conexion.js')}}"></script>
+        <script src="{{ asset('js/juego/juego.js')}}"></script>
+    {% endblock %}
+{% endblock %}
