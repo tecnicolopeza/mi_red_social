@@ -66,6 +66,8 @@
                                             <small class="text-muted">{{ publication.created|timeAgo }}</small>
                                         </p>
 
+                                        <span>{{path('likesPublication', {'publication':publication.user_id})}}</span>
+
                                         {% if publication.user_id is defined and publication.user_id != app.user.id %}
                                         
                                             <button type="button" class="btn float-end like btn-like

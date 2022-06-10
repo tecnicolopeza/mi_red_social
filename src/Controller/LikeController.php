@@ -105,4 +105,18 @@ class LikeController extends AbstractController
                 'title' => 'Likes', 'pagination' => $publications, 'user' => $user
             ]);
         }
+
+        #[Route('/likesPublication/{publication}', name: 'likesPublication')]
+        public function likesPublication($publication = null, PersistenceManagerRegistry $doctrine){
+
+            $em = $doctrine->getManager();
+            $repository = $em->getRepository(Publications::class);
+    
+            $likes = $repository->findBy(array(
+                'id' => $publication
+            ));
+    
+            return new Response(count($likes));
+    
+        }
 }
