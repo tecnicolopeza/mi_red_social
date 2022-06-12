@@ -41,11 +41,11 @@ function jugar() {
         }
     } else {
         if (puntuacion >= 30) {
-            alert("¡Partida acabada! Medala de ORO  \nSal un poco a que te de el sol");
+            alert("¡Partida acabada! Medalla de ORO  \nSal un poco a que te de el sol");
         } else if (puntuacion < 30 && puntuacion >= 20) {
-            alert("¡Partida acabada! Medala de PLATA  \nNada mal :o");
+            alert("¡Partida acabada! Medalla de PLATA  \nNada mal :o");
         } else {
-            alert("¡Partida acabada! Medala de BRONCE  \nTe falta ver un poco de anime compañero :P");
+            alert("¡Partida acabada! Medalla de BRONCE  \nTe falta ver un poco de anime compañero :P");
         }
 
         rondas = 10;
@@ -60,7 +60,7 @@ function jugar() {
 
 }
 
-function cambiarPersonaje(aleatorio) {
+function cambiarPersonaje(aleatorio) { //cambia imagen
     let tabla = document.getElementById("tablaJuego");
     if (personajes[aleatorio] != undefined) {
         tabla.setAttribute("background", personajes[aleatorio].image.large);
@@ -68,7 +68,7 @@ function cambiarPersonaje(aleatorio) {
 
 }
 
-async function comprobarRespuesta() {
+async function comprobarRespuesta() { //asincrona para que permita el setTimeout
     let respuesta = document.getElementById("respuesta").value;
 
     if (respuesta == "" || respuesta == " ") {
@@ -88,7 +88,7 @@ async function comprobarRespuesta() {
     rondas--;
     document.getElementById("rondas").innerText = rondas;
     restablecer();
-    setTimeout(function() {
+    setTimeout(function() { //para que no de fallo con la animacion y no se vea el personaje antes de tiempo
 
         jugar();
 

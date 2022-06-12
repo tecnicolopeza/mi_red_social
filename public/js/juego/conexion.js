@@ -20,10 +20,11 @@ query ($page : Int, $perPage: Int) {
 `;
 
 // Define our query variables and values that will be used in the query request
+// Tiene que llamarse dos veces en llamadas distintias porque solo permite de 50 en 50
 var variables = {
-        page: 1,
-        perPage: 50
-    };
+    page: 1,
+    perPage: 50
+};
 
 var variables2 = {
     page: 2,
@@ -33,46 +34,47 @@ var variables2 = {
 // Define the config we'll need for our Api request
 var url = 'https://graphql.anilist.co';
 var options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-            query: query,
-            variables: variables
-        })
-    };
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+        query: query,
+        variables: variables
+    })
+};
 
-    var options2 = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-            query: query,
-            variables: variables2
-        })
-    };
+var options2 = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+        query: query,
+        variables: variables2
+    })
+};
 
-var personajes = [];
+var personajes = []; //lista de personajes
 
 // Make the HTTP Api request
+//Llamada a la api
 function obtenerListaPersonajes() {
 
     fetch(url, options).then(handleResponse)
-    .then(handleData)
-    .catch(handleError);
-    
+        .then(handleData)
+        .catch(handleError);
+
 }
 
 function obtenerListaPersonajes2() {
 
     fetch(url, options2).then(handleResponse)
-    .then(handleData)
-    .catch(handleError);
-    
+        .then(handleData)
+        .catch(handleError);
+
 }
 
 function handleResponse(response) {
@@ -83,9 +85,9 @@ function handleResponse(response) {
 
 function handleData(data) {
     console.log(data.data.Page.characters[0].name.full);
-    agregarALista(data.data.Page.characters);
+    agregarALista(data.data.Page.characters); //mete los personajes en el array
     console.log(personajes);
-    
+
     //Lamamos al metodo principal de juego, se llama aqui por motivos de sincronia
     jugar();
 }
