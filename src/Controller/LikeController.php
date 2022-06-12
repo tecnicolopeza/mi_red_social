@@ -110,13 +110,13 @@ class LikeController extends AbstractController
         public function likesPublication($publication = null, PersistenceManagerRegistry $doctrine){
 
             $em = $doctrine->getManager();
-            $repository = $em->getRepository(Publications::class);
+            $repositoryLikes = $em->getRepository(Likes::class);
+
     
-            $likes = $repository->findBy(array(
-                'id' => $publication
+            $likes = $repositoryLikes->findBy(array(
+                'publication' => $publication
             ));
     
             return new Response(count($likes));
-    
         }
 }
