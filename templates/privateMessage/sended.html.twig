@@ -62,15 +62,10 @@
                                             {{message.sender_id|userById.nick}}
                                         </a>
                                         -
-                                        <a class="text-decoration-none text-dark font-weight-bold">
-                                            {{message.sender_id|userById.name}}
-                                        </a>
-                                        <a class="text-decoration-none text-dark font-weight-bold">
-                                            {{message.sender_id|userById.surname}}
-                                        </a>
+                                            For <a class="text-decoration-none text-dark" href="{{path('profile', {'nickname': message.receiver_id|userById.nick})}}"> {{message.receiver_id|userById.nick}}</a>
                                         -
                                         <p class="card-text d-inline-block mb-1">
-                                            <small class="text-muted">{{ message.sender_id|timeAgo }}</small>
+                                            <small class="text-muted">{{ message.created|timeAgo }}</small>
                                         </p>
                                         
                                         <p class="card-text">{{ message.message }}</p>
