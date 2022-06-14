@@ -1,1 +1,273 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Help center{% endblock %}
+
+{% block body %}
+<div class="col">
+    
+    <div class="container w-75">
+
+
+        <h1 class="display-4 text-center my-5 box-header">Help center</h1>
+        <div class="pb-3 fs-5 text-center">OtakuRoom app help center. Need help?</div>
+    
+        <div class="row text-center m-1">
+            
+            <div class="col-lg-6">
+                <div class="card border-secondary mb-3 p-3 m-1 shadow">
+                    <h4 class="p-1">Use of OtakuRoom</h4>
+
+                    {# Acordeon #}
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="publication-headingOne">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#publication-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                How to create a publication
+                            </button>
+                            </h2>
+                            <div id="publication-collapseOne" class="accordion-collapse collapse" aria-labelledby="publication-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body text-start">
+                                <strong>Step 1</strong><br>
+                                <div class="p-1">Write your post (up to 300 characters) in the compose box located on the right side of the home timeline.</div>
+                                <br><strong>Step 2</strong><br>
+                                <div class="p-1">You can include a photo or a PDF in your publication.</div>
+                                <br><strong>Step 3</strong><br>
+                                <div class="p-1">Click the Send button to post.</div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="Sign-headingTwo">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#Sign-collapseTwo" aria-expanded="false" aria-controls="Sign-collapseTwo">
+                                Sign up for OtakuRoom
+                            </button>
+                            </h2>
+                            <div id="Sign-collapseTwo" class="accordion-collapse collapse" aria-labelledby="Sign-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body text-start">
+                                <strong>Step 1</strong><br>
+                                <div class="p-1">Go to otakuroom.es/register.</div>
+                                <br><strong>Step 2</strong><br>
+                                <div class="p-1">Click the sign up button.</div>  
+                                <br><strong>Step 3</strong><br>
+                                <div class="p-1">A Create your account pop-up box will appear and you will be guided through the registration experience. You will be prompted to enter information such as your name and email address.</div>
+                                <br><strong>Step 4</strong><br>
+                                <div class="p-1">After entering your information, click Next and you will have signed in to OtakuRoom.</div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="Messages-headingThree">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#Messages-collapseThree" aria-expanded="false" aria-controls="Messages-collapseThree">
+                                Information about Private Messages
+                            </button>
+                            </h2>
+                            <div id="Messages-collapseThree" class="accordion-collapse collapse" aria-labelledby="Messages-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="p-1">You can start a private conversation with anyone you follow.</div>
+                                <div class="p-1">People you don't follow can send you a Direct Message if that person follows you.</div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border-secondary mb-3 p-3 m-1 shadow">
+                    <h4 class="p-1">Rules and policies</h4>
+
+                    {# Acordeon #}
+                    <div class="accordion accordion-flush" id="accordionFlushExample1">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="cookies-headingOne">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#cookies-collapseOne" aria-expanded="false" aria-controls="cookies-collapseOne">
+                                How cookies are used on OtakuRoom
+                            </button>
+                            </h2>
+                            <div id="cookies-collapseOne" class="accordion-collapse collapse" aria-labelledby="cookies-headingOne" data-bs-parent="#accordionFlushExample1">
+                            <div class="accordion-body">
+                                <div class="p-1">Cookies and other similar technologies, such as pixels or local storage, give you a better, faster and more secure experience on OtakuRoom. Cookies are also used to operate our services, which include our websites, applications, APIs, pixels, and content embedders.</div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="Security-headingTwo">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#Security-collapseTwo" aria-expanded="false" aria-controls="Security-collapseTwo">
+                                Security
+                            </button>
+                            </h2>
+                            <div id="Security-collapseTwo" class="accordion-collapse collapse" aria-labelledby="Security-headingTwo" data-bs-parent="#accordionFlushExample1">
+                            <div class="accordion-body text-start">
+                                <div class="p-1">
+                                <u>Violence</u>: You cannot make violent threats against a person or a group of people. We also prohibit the glorification of violence.<br>
+                                <u>Terrorism/Violent Extremism</u>: You may not threaten or encourage terrorism or violent extremism.<br>
+                                <u>Child sexual exploitation</u>: We have a zero tolerance policy for child sexual exploitation at OtakuRoom.<br>
+                                <u>Abuse/Harassment</u>: You may not engage in bullying directed at one person or incite others to do so. This includes wishing or expecting someone to come to physical harm.<br>
+                                <u>Hateful Behavior</u>: You may not encourage violence against or threaten or harass others because of their race, ethnic origin, national origin, caste, sexual orientation, gender, gender identity, religious affiliation, age, disability, or serious illness.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="Policy-headingThree">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#Policy-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Private Information Policy
+                            </button>
+                            </h2>
+                            <div id="Policy-collapseThree" class="accordion-collapse collapse" aria-labelledby="Policy-headingThree" data-bs-parent="#accordionFlushExample1">
+                            <div class="accordion-body">
+                                <div class="p-1">You may not post other people's private information without their express authorization and permission. We also prohibit threatening to disclose private information or encouraging others to do so.<br>
+                                    Also, you can't share private media content, like pictures or videos of private people, without their consent. However, we recognize that there are instances where users may share images or videos of private individuals, who are not public figures, as part of a newsworthy event or to promote public discourse related to issues or events of public interest. In those cases, we may allow the media content to remain on the platform.</div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>               
+
+            </div>
+        </div>
+
+        <div class="row text-center m-1">
+            
+            <div class="col-lg-6">
+                <div class="card border-secondary mb-3 p-3 m-1 shadow">
+                    <h4 class="p-1">Manage your account</h4>
+
+                    {# Acordeon #}
+                    <div class="accordion accordion-flush" id="accordionFlushExample2">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="email-headingOne">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#email-collapseOne" aria-expanded="false" aria-controls="email-collapseOne">
+                                How to update the email address
+                            </button>
+                            </h2>
+                            <div id="email-collapseOne" class="accordion-collapse collapse" aria-labelledby="email-headingOne" data-bs-parent="#accordionFlushExample2">
+                            <div class="accordion-body text-start">
+                                <strong>Step 1</strong><br>
+                                <div class="p-1">Sign in to otakuroom.es and go to the Account Settings page. To do this, click on the icon with your name at the bottom of the menu.</div>
+                                <br><strong>Step 2</strong><br>
+                                <div class="p-1">Type your email address in the Email field.<br>
+                                        Note: Only one email address can be associated with an OtakuRoom account at a time.</div>  
+                                <br><strong>Step 3</strong><br>
+                                <div class="p-1">Click the Save Changes button that appears at the bottom of the page.</div>
+
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="profile-headingTwo">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#profile-collapseTwo" aria-expanded="false" aria-controls="profile-collapseTwo">
+                                How to customize your profile
+                            </button>
+                            </h2>
+                            <div id="profile-collapseTwo" class="accordion-collapse collapse" aria-labelledby="profile-headingTwo" data-bs-parent="#accordionFlushExample2">
+                            <div class="accordion-body text-start">
+                                <div class="p-1">
+                                    1. Log in to otakuroom.es.<br>
+                                    2. Go to your profile.<br>
+                                    3. Tap or click the Edit Profile button to be able to edit the following elements of your account:<br>
+                                     Profile picture (recommended size is 400 x 400 pixels)<br>
+                                     Name<br>
+                                     Biography (160 characters maximum)<br>
+                                     Nick<br>
+                                    4. Tap or click on any of these areas to make changes.<br>
+                                    5. Tap or click Save.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="username-headingThree">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#username-collapseThree" aria-expanded="false" aria-controls="username-collapseThree">
+                                How to change your OtakuRoom username
+                            </button>
+                            </h2>
+                            <div id="username-collapseThree" class="accordion-collapse collapse" aria-labelledby="username-headingThree" data-bs-parent="#accordionFlushExample2">
+                            <div class="accordion-body text-start">
+                                <strong>Step 1</strong><br>
+                                <div class="p-1">Sign in to otakuroom.es and go to the Account Settings page. To do this, click on the icon with your name at the bottom of the menu.</div>
+                                <br><strong>Step 2</strong><br>
+                                <div class="p-1">In the Account Information section, update the username that appears in the Username field. If the username is already in use, you will be prompted to choose another.</div>  
+                                <br><strong>Step 3</strong><br>
+                                <div class="p-1">Click the Save Changes button that appears at the bottom of the page.</div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card border-secondary mb-3 p-3 m-1 shadow">
+                    <h4 class="p-1">Safety and prevention</h4>
+
+                    {# Acordeon #}
+                    <div class="accordion accordion-flush" id="accordionFlushExample3">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="protect-headingOne">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#protect-collapseOne" aria-expanded="false" aria-controls="protect-collapseOne">
+                                How to protect your personal information
+                            </button>
+                            </h2>
+                            <div id="protect-collapseOne" class="accordion-collapse collapse" aria-labelledby="protect-headingOne" data-bs-parent="#accordionFlushExample3">
+                            <div class="accordion-body">
+                                <div class="p-1">
+                                    You are in control of how much information you share on OtakuRoom on any website. Don't post information you consider private, and think about whether you want to share your location publicly.<br>
+
+                                    Be careful with any communication that asks for your private contact details, personal information or passwords. If you're ever unsure about posting content, we recommend asking yourself the following:<br>
+
+                                    Who am I sharing this information with?<br>
+                                    How much information am I sharing and what kind?<br>
+                                    How many people can see the information I am sharing?<br>
+                                    Can I trust everyone who sees this information?
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="hacked-headingTwo">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#hacked-collapseTwo" aria-expanded="false" aria-controls="hacked-collapseTwo">
+                                Help with my hacked account
+                            </button>
+                            </h2>
+                            <div id="hacked-collapseTwo" class="accordion-collapse collapse" aria-labelledby="hacked-headingTwo" data-bs-parent="#accordionFlushExample3">
+                            <div class="accordion-body">
+                                <div class="p-1">1. Request a password reset.</div>
+                                <div class="p-1">2. If you still need help, contact the Support team.</div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="offensive-headingThree">
+                            <button class="accordion-button collapsed fw-bolder" type="button" data-bs-toggle="collapse" data-bs-target="#offensive-collapseThree" aria-expanded="false" aria-controls="offensive-collapseThree">
+                                Information about offensive content
+                            </button>
+                            </h2>
+                            <div id="offensive-collapseThree" class="accordion-collapse collapse" aria-labelledby="offensive-headingThree" data-bs-parent="#accordionFlushExample3">
+                            <div class="accordion-body">
+                                <div class="p-1">OtakuRoom allows us to engage in wide-ranging conversations and connect with people from all corners of the globe. While being connected with many people can be an enriching experience, it can also be a source of frustration and misunderstanding if the context of the conversation is not taken into account.</div>
+                                <div class="p-1">When you see an offensive Tweet, pause and consider the conversation it might be related to. Since the posts are short, the author's intended meaning may have been lost or distorted. Post a reply to join the conversation and report your concern. If you prefer to communicate privately, send a Private Message. If you have more information, you can more easily understand the context and generate a healthy dialogue.</div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <footer class="p-3">
+                <hr />
+                <div class="text-center">OtakuRoom - 2022</div>
+            </footer>
+            
+
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
