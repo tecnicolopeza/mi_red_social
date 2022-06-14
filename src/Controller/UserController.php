@@ -258,4 +258,12 @@ class UserController extends AbstractController
             'title' => 'juego'
         ]);
     }
+
+    #[Route('/help', name: 'help')]
+    public function help(){
+        return $this->render('user/help.html.twig', [
+            'title' => 'Help'
+        ]);
+    }
+
 }

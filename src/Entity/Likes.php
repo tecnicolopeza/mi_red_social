@@ -16,7 +16,7 @@ class Likes
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'likes')]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: publications::class, inversedBy: 'likes')]
+    #[ORM\ManyToOne(targetEntity: Publications::class, inversedBy: 'likes')]
     private $publication;
 
     public function getId(): ?int

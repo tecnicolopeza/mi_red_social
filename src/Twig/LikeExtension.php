@@ -7,6 +7,7 @@ use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Doctrine\Persistence\ManagerRegistry as PersistenceManagerRegistry;
 use App\Entity\Likes;
+use App\Entity\Publications;
 
 class LikeExtension extends AbstractExtension{
 
@@ -22,7 +23,7 @@ class LikeExtension extends AbstractExtension{
             // If your filter generates SAFE HTML, you should add a third
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
-            new TwigFilter('filter_name', [$this, 'doSomething']),
+            new TwigFilter('likeStats', [$this, 'likesPublicationFunction']),
         ];
     }
 
@@ -30,6 +31,7 @@ class LikeExtension extends AbstractExtension{
     {
         return [
             new TwigFunction('likeStatus', [$this, 'likeStatusFunction']),
+            // new TwigFunction('likesPublication', [$this, 'likesPublicationFunction']),
         ];
     }
 
@@ -50,4 +52,21 @@ class LikeExtension extends AbstractExtension{
 
         return $result;
     }
+
+    // public function likesPublicationFunction($publication = null){
+
+    //     $em = $this->doctrine->getManager();
+    //     $repository = $em->getRepository(Publications::class);
+
+    //     $likes = $repository->findBy(array(
+    //         'id' => $publication
+    //     ));
+
+    //     return count($likes);
+
+    //     // return $this->render('user/countLikes.html.twig', [
+    //     //     'title' => 'CountLikes', 'likes' => $likes
+    //     // ]);
+
+    // }
 }

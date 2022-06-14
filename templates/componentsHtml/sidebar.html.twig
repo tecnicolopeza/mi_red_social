@@ -116,6 +116,12 @@
                 <span class="badge rounded-pill badge-notification bg-primary label-notifications"></span>Notifications
             </a>
         </li>
+
+        <li class="nav-item ">
+            <a href="{{ path('juego')}}" class="nav-link text-white text-decoration-none">
+                Game
+            </a>
+        </li>
         
     </ul>
     {% endif %}
@@ -155,6 +161,7 @@
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="{{ path('account')}}">Account</a></li>
                 <li><a class="dropdown-item" href="{{ path('profile')}}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ path('help')}}">Help</a></li>
                 <li><a class="dropdown-item" href="{{ path('logout')}}">Logout</a></li>
             </ul>
         </div>

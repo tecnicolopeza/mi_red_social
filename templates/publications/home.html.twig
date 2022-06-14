@@ -3,6 +3,7 @@
 {% block javascripts %}
 {{ parent() }}
 <script src="{{ asset('js/publications.js')}}"></script>
+<script src="{{ asset('js/countLikes.js')}}"></script>
 {% endblock %}
 
 {% block stylesheets %}
@@ -66,9 +67,11 @@
                                             <small class="text-muted">{{ publication.created|timeAgo }}</small>
                                         </p>
 
-                                        <span>{{path('likesPublication', {'publication':publication.user_id})}}</span>
+                                        <p id="publication" class="publication_id" hidden>{{publication.id}}</p>
+                                        <span class="countLikes float-end p-1"></span> 
 
                                         {% if publication.user_id is defined and publication.user_id != app.user.id %}
+ 
                                         
                                             <button type="button" class="btn float-end like btn-like
                                             
@@ -168,7 +171,6 @@
                         <div class="card-body">
                             <a href="{{ path('profile')}}" class="card-title text-decoration-none fw-bolder h4">{{app.user.nick}}</a>
                             <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
-                            <p class="card-text"><small class="text-muted">Last update 3 mins ago</small></p>
                         </div>
                     </div>
                     <div class="card-group text-center mb-2 mt-2 fw-bolder">
