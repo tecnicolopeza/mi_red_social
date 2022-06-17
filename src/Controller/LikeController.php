@@ -30,6 +30,9 @@ class LikeController extends AbstractController
 
         $likes->setUser($user);
         $likes->setPublication($publication);
+        // Se suma el like en la publicacion
+        $cantidadLikes = $publication->getLikes();
+        $publication->setLikes($cantidadLikes+1);
 
         $entityManager->persist($likes);
         $flush = $entityManager->flush();
@@ -57,6 +60,12 @@ class LikeController extends AbstractController
             'user' => $user,
             'publication' => $publication_id,
         ]);
+
+        $publication_repository = $entityManager->getRepository(Publications::class);
+        $publication = $publication_repository->find($publication_id);
+        // Se resta el like en la publicacion
+        $cantidadLikes = $publication->getLikes();
+        $publication->setLikes($cantidadLikes-1);
 
         $entityManager->remove($like);
         $flush = $entityManager->flush();
@@ -104,19 +113,5 @@ class LikeController extends AbstractController
             return $this->render('user/likes.html.twig', [
                 'title' => 'Likes', 'pagination' => $publications, 'user' => $user
             ]);
-        }
-
-        #[Route('/likesPublication/{publication}', name: 'likesPublication')]
-        public function likesPublication($publication = null, PersistenceManagerRegistry $doctrine){
-
-            $em = $doctrine->getManager();
-            $repositoryLikes = $em->getRepository(Likes::class);
-
-    
-            $likes = $repositoryLikes->findBy(array(
-                'publication' => $publication
-            ));
-    
-            return new Response(count($likes));
         }
 }

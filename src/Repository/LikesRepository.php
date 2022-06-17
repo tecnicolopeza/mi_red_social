@@ -92,21 +92,4 @@ class LikesRepository extends ServiceEntityRepository
         return $resultSet->fetchAll();
     }
 
-    // consulta cantidad de likes de una publicacion
-    public function findLikesPublication($publication){
-        
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-                SELECT * FROM publications p WHERE p.id IN (SELECT user_id FROM likes l
-                 WHERE l.publication_id = :publication) ORDER BY p.id DESC;
-                ';
-        
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['publication'=>$publication]);
-
-        return $resultSet->fetchAll();
-    }
-
-
 }

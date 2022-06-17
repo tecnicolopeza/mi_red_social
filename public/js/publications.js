@@ -74,7 +74,7 @@ function likeBtn() {
             data: { publication: $(this).attr('data-btn-like') },
             type: 'POST',
             success: function(data) {
-                console.log(data);
+                location.reload();
             }
         });
     });
@@ -89,7 +89,7 @@ function dislikeBtn() {
             data: { publication: $(this).attr('data-btn-dislike') },
             type: 'POST',
             success: function(data) {
-                console.log(data);
+                location.reload();
             }
         });
     });
