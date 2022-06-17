@@ -37,15 +37,13 @@
 
                                 {% if notification.type_not == "follow" %}
                                     <a href="{{ path("profile",{'nickname':notu.nick})}}">
-                                        {{notu.name}} {{notu.surname}}
-                                    </a>
+                                        {{notu.name}} {{notu.surname}}</a> 
                                      te está siguiendo.
                                 {% endif %}
 
                                 {% if notification.type_not == "like" %}
                                     <a href="{{ path("profile",{'nickname':notu.nick})}}">
-                                        {{notu.name}} {{notu.surname}}
-                                    </a>
+                                        {{notu.name}} {{notu.surname}}</a> 
                                      le ha dado me gusta a una de tus publicaciones.
                                 {% endif %}
                             </div>

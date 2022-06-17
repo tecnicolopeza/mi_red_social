@@ -82,7 +82,7 @@ class NotificationsRepository extends ServiceEntityRepository
 
         $sql = '
                 SELECT * FROM notifications n WHERE n.user_id = :user
-                 ORDER BY n.id DESC;
+                 ORDER BY n.created DESC;
                 ';
         
         $stmt = $conn->prepare($sql);
