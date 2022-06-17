@@ -33,8 +33,13 @@ class Publications
     #[ORM\Column(type: 'datetime')]
     private $created;
 
-    #[ORM\OneToMany(mappedBy: 'publication', targetEntity: Likes::class)]
+    // #[ORM\OneToMany(mappedBy: 'publication', targetEntity: Likes::class)]
+    // private $likes;
+
+    #[ORM\Column(type: 'integer', length: 100)]
     private $likes;
+
+
 
     public function __construct()
     {
@@ -118,32 +123,52 @@ class Publications
         return $this;
     }
 
+    // /**
+    //  * @return Collection<int, Likes>
+    //  */
+    // public function getLikes(): Collection
+    // {
+    //     return $this->likes;
+    // }
+
+    // public function addLike(Likes $like): self
+    // {
+    //     if (!$this->likes->contains($like)) {
+    //         $this->likes[] = $like;
+    //         $like->setPublication($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeLike(Likes $like): self
+    // {
+    //     if ($this->likes->removeElement($like)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($like->getPublication() === $this) {
+    //             $like->setPublication(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
     /**
-     * @return Collection<int, Likes>
-     */
-    public function getLikes(): Collection
+     * Get the value of likes
+     */ 
+    public function getLikes()
     {
         return $this->likes;
     }
 
-    public function addLike(Likes $like): self
+    /**
+     * Set the value of likes
+     *
+     * @return  self
+     */ 
+    public function setLikes($likes)
     {
-        if (!$this->likes->contains($like)) {
-            $this->likes[] = $like;
-            $like->setPublication($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLike(Likes $like): self
-    {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getPublication() === $this) {
-                $like->setPublication(null);
-            }
-        }
+        $this->likes = $likes;
 
         return $this;
     }

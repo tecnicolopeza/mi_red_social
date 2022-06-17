@@ -62,6 +62,7 @@ class PublicationsController extends AbstractController
                 $publication->setCreated(new \DateTime("now"));
                 $publication->setUser($this->getUser());
                 $publication->setStatus("public");
+                $publication->setLikes(0);
                 
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($publication);
