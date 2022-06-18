@@ -56,8 +56,6 @@ function jugar() {
 
     }
 
-
-
 }
 
 function cambiarPersonaje(aleatorio) { //cambia imagen
@@ -72,14 +70,14 @@ async function comprobarRespuesta() { //asincrona para que permita el setTimeout
     let respuesta = document.getElementById("respuesta").value;
 
     if (respuesta == "" || respuesta == " ") {
-        alert("La proxima vez intenta poner algo");
+        alert("El personaje era " + personajes[ultimoAleatorio].name.full);
     } else {
 
         if (validarNombre(respuesta.toLowerCase(), personajes[ultimoAleatorio].name.full.toLowerCase())) {
-            alert("¡Se nota que sabes de esto!");
+            alert("¡Se nota que sabes de esto! Era " + personajes[ultimoAleatorio].name.full);
             puntuacion = puntuacion + intentos;
         } else {
-            alert("¡Fallaste! Te queda bastante anime por ver");
+            alert("¡Fallaste! Te queda mucho anime por ver, era " + personajes[ultimoAleatorio].name.full);
         }
     }
 

@@ -1,0 +1,38 @@
+body {
+    max-width: calc(100vw - 1.8rem);
+}
+
+.bi-heart:hover {
+    color: red;
+}
+
+.bi-heart-fill {
+    color: red;
+}
+
+.badge-notification {
+    position: relative;
+    left: -1.1rem;
+    top: -0.9rem;
+    margin: 0;
+}
+
+.profile-menu {
+    position: relative;
+    top: 4rem;
+}
+
+.profile-div {
+    margin-left: 1rem;
+}
+
+.me-2 {
+    margin-right: 1.5rem !important;
+}
+
+.fondo {
+    background-image: url("../img/img-server/fondo2.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

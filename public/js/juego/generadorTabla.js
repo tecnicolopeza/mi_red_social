@@ -1,4 +1,4 @@
-let intentos = 4;
+let intentos = 4; //numero de casillas
 let nivel = "";
 let mensajeIntentos = "Remaining attempts: "
 

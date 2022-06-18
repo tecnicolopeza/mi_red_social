@@ -31,21 +31,21 @@
         {% endfor %}
 
 
-        <h1 class="display-4 text-center my-5 box-header">Message Private</h1>
+        <h1 class="display-4 text-secondary text-center my-5 box-header">Message Private</h1>
     
         <div class="row">
             <div class="col-lg-5">
-                <h4>Send new message private</h4>
+                <h4 class="text-secondary">Send new message private</h4>
                 {{form_start(form,{'action':'', 'method':'POST'})}}
                 {{form_end(form)}}
 
                 <br />
-                <a href="{{ path('sended')}}" class="btn btn-warning">View sent messages</a>
+                <a href="{{ path('sended')}}" class="btn btn-primary text-light">View sent messages</a>
             </div>
 
             <div class="col-lg-6 ms-5">
 
-                <h4>Received messages</h4>
+                <h4 class="text-secondary">Received messages</h4>
                 <hr />
 
                 <div class="card-body text-secondary p-0 content-publications">                 

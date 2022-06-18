@@ -19,7 +19,7 @@
 
 {% block body %}
 <body>
-<div class="col">
+<div class="col fondo">
 <div class="container mt-4">
     {% for message in app.session.flashBag.get('msg') %} <!--Mensaje de registro correcto-->
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -31,10 +31,10 @@
         {% endfor %}
     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-12 col-xl-8">
             <div class="card border-secondary mb-3" style="min-height:40em">
-                <div class="card-header bg-transparent text-dark mb-3">Timeline</div>
-                <div class="card-body text-secondary p-0 content-publications">
+                <div class="card-header bg-transparent fw-bold text-primary mb-3">Timeline</div>
+                <div class="card-body text-primary p-0 content-publications">
                     
                     {% for publication in pagination %}
                         <div class="card border-top-0 publication-item">
@@ -56,10 +56,10 @@
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -
-                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                        <a class="text-decoration-none text-primary font-weight-bold">
                                             {{publication.user_id|userById.name}}
                                         </a>
-                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                        <a class="text-decoration-none text-primary font-weight-bold">
                                             {{publication.user_id|userById.surname}}
                                         </a>
                                         -
@@ -147,13 +147,13 @@
                         <div id="spinner1" class="spinner mx-auto text-center"><img src="{{ asset("img/loader.gif") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;"></div>
                     </div>
                 </div>
-                <div class="no-more text-center">No more publications</div>
+                <div class="no-more text-center mb-4">No more publications</div>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-12 col-xl-4">
             <div class="card mb-3 border-secondary">
-                <div class="row">
+                <div class="row d-flex">
                     <div class="col-md-4">
                         <div class="card-body">
                             {% if app.user.image == null %}
@@ -205,7 +205,7 @@
                 </div>
             </div>
             <div class="card border-secondary mb-3">
-                <div class="card-body text-secondary">
+                <div class="card-body text-primary">
                     <h5 class="card-title">Create {{title}}</h5>
                     {{ form_start(form) }} 
                     {{ form_widget(form) }}

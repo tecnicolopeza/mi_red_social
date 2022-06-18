@@ -26,7 +26,7 @@
 
         <div class="col-md-12">
             <div class="card border-secondary mb-3" style="min-height:40em">
-                <div class="card-header bg-transparent text-dark mb-3">Timeline</div>
+                <div class="card-header bg-transparent fw-bold text-primary mb-3">Timeline</div>
                 <div class="card-body text-secondary p-0 content-publications">
                     
                     {% for notification in pagination %}
@@ -36,15 +36,15 @@
                                 {% set notu = notification.type_id|get_user %}
 
                                 {% if notification.type_not == "follow" %}
-                                    <a href="{{ path("profile",{'nickname':notu.nick})}}">
+                                    <a href="{{ path("profile",{'nickname':notu.nick})}}" class="text-secondary text-decoration-none fw-bold">
                                         {{notu.name}} {{notu.surname}}</a> 
-                                     te está siguiendo.
+                                    <span class="text-primary">te está siguiendo.<span>
                                 {% endif %}
 
                                 {% if notification.type_not == "like" %}
-                                    <a href="{{ path("profile",{'nickname':notu.nick})}}">
+                                    <a href="{{ path("profile",{'nickname':notu.nick})}}" class="text-secondary text-decoration-none fw-bold">
                                         {{notu.name}} {{notu.surname}}</a> 
-                                     le ha dado me gusta a una de tus publicaciones.
+                                    <span class="text-primary">le ha dado me gusta a una de tus publicaciones.<span>
                                 {% endif %}
                             </div>
                         </div>

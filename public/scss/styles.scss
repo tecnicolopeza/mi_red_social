@@ -1,0 +1,10 @@
+$azul-oscuro: #3C4BE6;
+$azul-claro: #3579E6;
+$naranja-oscuro: #E69A3E;
+$celeste: #29A8E6;
+//VARIABLES BOOTSTRAP MODIFICADAS
+$primary: $azul-claro;
+$secondary: $naranja-oscuro;
+$dark: $naranja-oscuro;
+$warning: $celeste;
+@import "../bootstrap/scss/bootstrap.scss";

@@ -20,10 +20,6 @@
                 </li>
             </ul>
 
-            <form class="d-flex" action="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </form>
 
             {% endif %}
 
@@ -53,32 +49,6 @@
                         
                     </span>
                 </a>
-            </li>
-
-            <li class="nav-item dropdown mx-0 p-0">
-                <a href="" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopub="true" aria-expanded="false">
-
-                    {% if app.user.image == null %}
-
-                    <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle mr-1" style="width:1.8em; height:1.8em;">
-
-                    {% else %}
-
-                    <img src="{{ asset("img/"~app.user.image) }}" alt="" class="rounded-circle mr-1" style="width:1.8em; height:1.8em;">
-
-                    {% endif %}
-
-                    {{ app.user.name }}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a href="{{ path('account')}}" class="dropdown-item">Account</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ path('profile')}}" class="dropdown-item">Profile</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ path('help')}}" class="dropdown-item">Help</a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{{ path('logout')}}" class="dropdown-item">Logout</a>
-                </div>
             </li>
 
             {% endif %}

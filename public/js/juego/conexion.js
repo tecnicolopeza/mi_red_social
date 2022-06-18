@@ -84,7 +84,7 @@ function handleResponse(response) {
 }
 
 function handleData(data) {
-    console.log(data.data.Page.characters[0].name.full);
+    // console.log(data.data.Page.characters[0].name.full);
     agregarALista(data.data.Page.characters); //mete los personajes en el array
     console.log(personajes);
 

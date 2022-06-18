@@ -32,7 +32,7 @@ class PublicationsType extends AbstractType
             #boton de save de los datos de publications
             ->add('Send', SubmitType::class, array(
                 'attr'=> array(
-                    'class'=>'btn-dark mt-2'
+                    'class'=>'btn-primary text-light mt-2'
                 )))
         ;
     }

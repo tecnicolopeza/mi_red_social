@@ -32,16 +32,16 @@ class PrivateMessageType extends AbstractType
                 'attr' => array('class' => "form-control")
             ))
             ->add('message', TextareaType::class, array(
-                'label' => 'Message',
+                'label' => 'Message:',
                 'required' => 'required'
             ))
             ->add('image', FileType::class, array(
-                'label' => 'Image',
+                'label' => 'Image:',
                 'required' => false,
                 'data_class' => null,
             ))
             ->add('file', FileType::class, array(
-                'label' => 'Document',
+                'label' => 'Document:',
                 'required' => false,
                 'data_class' => null
             ))
@@ -49,7 +49,7 @@ class PrivateMessageType extends AbstractType
             #boton de save de los datos de publications
             ->add('Send', SubmitType::class, array(
                 'attr'=> array(
-                    'class'=>'btn-dark mt-2'
+                    'class'=>'btn-primary text-light mt-2'
                 )))
         ;
     }
