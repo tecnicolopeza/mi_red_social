@@ -16,7 +16,6 @@ function inicializar() {
     generaTabla();
     obtenerListaPersonajes();
     obtenerListaPersonajes2();
-
 }
 
 function jugar() {

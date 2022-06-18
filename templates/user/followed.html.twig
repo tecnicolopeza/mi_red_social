@@ -23,13 +23,13 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-                <h1 class="display-4 text-center">Gente que sigue a {{profile_user.nick}}</h1>
+                <h1 class="display-4 text-center">People who follow {{profile_user.nick}}</h1>
         </div>
     </div>
 
     <div class="count m-3">
         <span class="badge bg-secondary">
-            Total de usuarios: {{users.getTotalItemCount}}
+            All users: {{users.getTotalItemCount}}
         </span>
     </div>
 
@@ -45,16 +45,16 @@
             {% endif %}
             <span class="d-inline-block">
                 <span class="mx-2">
-                    <a href="{{path('profile', {'nickname': user.id|userById.nick})}}" >{{user.name}} {{user.surname}}</a>
+                    <a class="text-decoration-none text-secondary fw-bold" href="{{path('profile', {'nickname': user.id|userById.nick})}}" >{{user.name}} {{user.surname}}</a>
                 </span>
-                <span class="mx-2">{{user.nick}}</span>
+                <span class="mx-2 text-decoration-none text-primary">{{user.nick}}</span>
                 <br>
                 <span class="mx-2">{{user.bio}}</span>
             </span>
 
             {% if app.user.id != user.id %}
                 <div class="float-end">
-                    <button type="button" class="btn btn-dark btn-sm btn-follow
+                    <button type="button" class="btn btn-primary text-light btn-sm btn-follow
                     
                         {% if followingStatus(app.user, user) == true %} 
 

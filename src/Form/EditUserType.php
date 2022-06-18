@@ -45,7 +45,7 @@ class EditUserType extends AbstractType
         #boton de save de los datos de account
         ->add('save', SubmitType::class, array(
             'attr'=> array(
-                'class'=>'btn-dark mt-2'
+                'class'=>'btn-primary text-light mt-2'
             )
         ))
     ;

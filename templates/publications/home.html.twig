@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <div class="col-md-12 col-xl-4">
+        <div class="col-md-12 col-xl-4 sidebar sticky-top">
             <div class="card mb-3 border-secondary">
                 <div class="row d-flex">
                     <div class="col-md-4">
@@ -170,35 +170,35 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <a href="{{ path('profile')}}" class="card-title text-decoration-none fw-bolder h4">{{app.user.nick}}</a>
-                            <p class="card-text">{{app.user.name}} {{app.user.surname}}</p>
+                            <p class="card-text text-secondary">{{app.user.name}} {{app.user.surname}}</p>
                         </div>
                     </div>
                     <div class="card-group text-center mb-2 mt-2 fw-bolder">
 
                         {% set userStatus = app.user|user_stats %}
 
-                                <div class="card border-0">
+                                <div class="card border-0 p-1">
                                     <a href="{{ path('following')}}" class="text-decoration-none">
                                         <span>Following</span><br>
-                                        <span>{{userStatus.following}}</span>
+                                        <span class="text-secondary">{{userStatus.following}}</span>
                                     </a>
                                 </div>
-                                <div class="card border-0">
+                                <div class="card border-0 p-1">
                                     <a href="{{ path('followed')}}" class="text-decoration-none">
                                         <span>Followers</span><br>
-                                        <span>{{userStatus.followers}}</span>
+                                        <span class="text-secondary">{{userStatus.followers}}</span>
                                     </a>
                                 </div>
-                                <div class="card border-0">
+                                <div class="card border-0 p-1">
                                     <a href="{{ path('profile')}}" class="text-decoration-none">
                                         <span>Publications</span><br>
-                                        <span>{{userStatus.publications}}</span>
+                                        <span class="text-secondary">{{userStatus.publications}}</span>
                                     </a>
                                 </div>
-                                <div class="card border-0">
+                                <div class="card border-0 p-1">
                                     <a href="{{ path('likesAction')}}" class="text-decoration-none">
                                         <span>Likes</span><br>
-                                        <span>{{userStatus.likes}}</span>
+                                        <span class="text-secondary">{{userStatus.likes}}</span>
                                     </a>
                                 </div>
                             </div>

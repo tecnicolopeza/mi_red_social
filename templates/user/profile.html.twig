@@ -13,7 +13,7 @@
     <div class="container mt-4 content-publications">    
         <div class="row">
             <div class="col-md-12">
-                <h1 class="display-4 text-center">{{title}}</h1>
+                <h1 class="display-4 text-center text-secondary">{{title}}</h1>
             </div>
         </div>           
         <div class="card mb-3 border-secondary p-3">
@@ -35,8 +35,8 @@
                     {# DATOS PERFIL USUARIO #}
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{user.nick}}</h5>
-                            <p class="card-text">{{user.name}} {{user.surname}}</p>
+                            <h5 class="card-title text-secondary">{{user.nick}}</h5>
+                            <p class="card-text text-primary">{{user.name}} {{user.surname}}</p>
                             <p class="card-text">{{user.bio}}</p>
                             {% if user.id == app.user.id %}
                                 <div class="d-flex flex-row-reverse p-3">
@@ -49,15 +49,15 @@
 
                                     {% if followingStatus(app.user, user) == true %}
                                         <button class="btn btn-sm btn-disable disable" disabled>
-                                            Te sigue
+                                            follows you
                                         </button>
                                     {% else %}
                                         <button class="btn btn-sm btn-disable disable" disabled>
-                                            No te sigue
+                                            it does not follow you
                                         </button>
                                     {% endif %}
 
-                                    <button type="button" class="btn btn-dark btn-sm btn-follow
+                                    <button type="button" class="btn btn-primary text-light btn-sm btn-follow
                                     
                                         {% if followingStatus(app.user, user) == true %} 
 
@@ -68,7 +68,7 @@
                                     "
                                     data-btn-follow="{{user.id}}">Follow</button>
 
-                                    <button type="button" class="btn btn-secondary btn-sm btn-unfollow
+                                    <button type="button" class="btn btn-secondary text-light btn-sm btn-unfollow
                                     
                                     {% if followingStatus(app.user, user) == false %} 
 
@@ -93,25 +93,25 @@
                                 <div class="card border-0">
                                     <a href="{{ path('following', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Following</span><br>
-                                        <span>{{userStatus.following}}</span>
+                                        <span class="text-secondary">{{userStatus.following}}</span>
                                     </a>
                                 </div>
                                 <div class="card border-0">
                                     <a href="{{ path('followed', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Followers</span><br>
-                                        <span>{{userStatus.followers}}</span>
+                                        <span class="text-secondary">{{userStatus.followers}}</span>
                                     </a>
                                 </div>
                                 <div class="card border-0">
                                     <a href="{{path('profile', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Publications</span><br>
-                                        <span>{{userStatus.publications}}</span>
+                                        <span class="text-secondary">{{userStatus.publications}}</span>
                                     </a>
                                 </div>
                                 <div class="card border-0">
                                     <a href="{{ path('likesAction', {'nickname': user.id|userById.nick})}}" class="text-decoration-none">
                                         <span>Likes</span><br>
-                                        <span>{{userStatus.likes}}</span>
+                                        <span class="text-secondary">{{userStatus.likes}}</span>
                                     </a>
                                 </div>
                             </div>
@@ -140,10 +140,10 @@
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -
-                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                        <a class="text-decoration-none text-primary font-weight-bold">
                                             {{publication.user_id|userById.name}}
                                         </a>
-                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                        <a class="text-decoration-none text-primary font-weight-bold">
                                             {{publication.user_id|userById.surname}}
                                         </a>
                                         -

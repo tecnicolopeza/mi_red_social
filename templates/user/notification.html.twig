@@ -38,13 +38,13 @@
                                 {% if notification.type_not == "follow" %}
                                     <a href="{{ path("profile",{'nickname':notu.nick})}}" class="text-secondary text-decoration-none fw-bold">
                                         {{notu.name}} {{notu.surname}}</a> 
-                                    <span class="text-primary">te está siguiendo.<span>
+                                    <span class="text-primary">is following you.<span>
                                 {% endif %}
 
                                 {% if notification.type_not == "like" %}
                                     <a href="{{ path("profile",{'nickname':notu.nick})}}" class="text-secondary text-decoration-none fw-bold">
                                         {{notu.name}} {{notu.surname}}</a> 
-                                    <span class="text-primary">le ha dado me gusta a una de tus publicaciones.<span>
+                                    <span class="text-primary">has liked one of your posts.<span>
                                 {% endif %}
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                         <div id="spinner1" class="spinner mx-auto text-center"><img src="{{ asset("img/loader.gif") }}" alt="" class="rounded-circle mx-auto" style="width:5em; height:5em;"></div>
                     </div>
                 </div>
-                <div class="no-more text-center">No more notification</div>
+                <div class="no-more text-center mb-4">No more notification</div>
             </div>
         </div>
     </div>
