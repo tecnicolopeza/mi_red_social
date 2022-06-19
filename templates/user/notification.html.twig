@@ -46,6 +46,10 @@
                                         {{notu.name}} {{notu.surname}}</a> 
                                     <span class="text-primary">has liked one of your posts.<span>
                                 {% endif %}
+
+                                {% if notification.type_not == "AciertaImagen" %}
+                                    <span class="text-primary">You got a new score of {{notification.extra}} in the game 'Guess the anime character'.<span>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}

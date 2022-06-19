@@ -47,6 +47,17 @@ function jugar() {
             alert("¡Partida acabada! Medalla de BRONCE  \nTe falta ver un poco de anime compañero :P");
         }
 
+        //insertar llamada a bd
+        $.ajax({ //comunicación asincrona envia datos
+            url: '/scoreUp',
+            data: { name:'AciertaImagen', score: puntuacion },
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
+
         rondas = 10;
         puntuacion = 0;
         document.getElementById("rondas").innerText = rondas;
