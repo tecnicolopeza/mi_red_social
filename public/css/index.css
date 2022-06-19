@@ -33,6 +33,7 @@ body {
 .fondo {
     background-image: url("../img/img-server/fondo2.jpg");
     background-repeat: no-repeat;
-    background-position: center;
+    /* background-position: center; */
     background-size: cover;
+    background-attachment: fixed;
 }

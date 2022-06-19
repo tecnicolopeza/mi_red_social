@@ -32,7 +32,7 @@
 
         <div class="col-md-12">
             <div class="card border-secondary mb-3" style="min-height:40em">
-                <div class="card-header bg-transparent text-dark mb-3">Timeline</div>
+                <div class="card-header bg-transparent text-primary fw-bold mb-3">Timeline</div>
                 <div class="card-body text-secondary p-0 content-publications">
                     
                     {% for publication in pagination %}
@@ -51,14 +51,14 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">
-                                        <a href="{{path('profile', {'nickname': publication.user_id|userById.nick})}}" class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a href="{{path('profile', {'nickname': publication.user_id|userById.nick})}}" class="text-decoration-none text-secondary" style="font-weight:500">
                                             {{publication.user_id|userById.nick}}
                                         </a>
                                         -
-                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                        <a class="text-decoration-none text-primary font-weight-bold">
                                             {{publication.user_id|userById.name}}
                                         </a>
-                                        <a class="text-decoration-none text-dark font-weight-bold">
+                                        <a class="text-decoration-none text-primary font-weight-bold">
                                             {{publication.user_id|userById.surname}}
                                         </a>
                                         -
@@ -102,7 +102,7 @@
                                         
                                         {% endif %}
                                         
-                                        <p class="card-text">{{ publication.text }}</p>
+                                        <p class="card-text" style="color: #000">{{ publication.text }}</p>
                                         
                                         {# Si la publicacion tiene img subida #}
                                         {% if publication.image is defined and publication.image != 'empty' %}

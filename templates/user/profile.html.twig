@@ -122,10 +122,10 @@
                         <div class="card border-top-0 publication-item">
                             <div class="row">
                                 {# CARD PUBLICACION #}
-                                <div class="col-md-2">
+                                <div class="col-md-2 d-flex flex-align justify-content-end">
                                     {% if publication.user_id|userById.image == null %}
 
-                                    <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle m-3" style="width:5em; height:5em;">
+                                    <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle m-3" style="width:7em; height:em;">
 
                                     {% else %}
 
@@ -192,15 +192,15 @@
                                         {# Si la publicacion tiene img subida #}
                                         {% if publication.image is defined and publication.image != 'empty' %}
                                             <div class="d-block">
-                                                <img src="{{ asset("img/"~publication.image) }}" class="img-fluid mt-2" alt="img failed">
+                                                <img src="{{ asset("img/"~publication.image) }}" width="70%" class="img-thumbnail mt-2" alt="img failed">
                                             </div>
                                         {% endif %}
-                                        <div>
+                                        <div class="mt-2">
                                         {# Si la publicacion tiene documento subido #}
                                         {% if publication.document is defined and publication.document != null %}
                                             <div class="d-inline">
-                                                <a href="{{ asset("document/"~publication.document) }}" class="text-decoration-none p-0" target="_blank">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                                <a href="{{ asset("document/"~publication.document) }}" class="align-middle text-decoration-none ms-2 p-0" target="_blank">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
                                                         <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
                                                     </svg>
                                                 </a>
@@ -210,8 +210,8 @@
                                         {# Si la publicacion tiene user_id y es la misma que el usuario logueado boton borrar #}
                                         {% if (publication.user_id is defined) and (publication.user_id == app.user.id) %}
                                             <div class="d-inline">
-                                                <button data-id="{{publication.id}}" class="btn btn-delete-pub align-baseline p-0" aria-hidden="true">  
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <button data-id="{{publication.id}}" class="btn btn-delete-pub float-end align-middle me-1 p-0" aria-hidden="true">  
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                                                     </svg>
                                                 </button>
@@ -221,6 +221,7 @@
                                 </div>
                             </div>
                         </div>
+                        <hr class="w-75 mx-auto my-4">
                     {% endfor %}
                     
                     <div class="d-flex justify-content-center">
