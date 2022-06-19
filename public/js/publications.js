@@ -54,13 +54,13 @@ function deleteBtn() {
         $(this).parent().parent().addClass('hidden');
 
         $.ajax({
-            url: '/publication/remove/'+$(this).attr("data-id"),
+            url: '/publication/remove/' + $(this).attr("data-id"),
             type: 'POST',
-            success: function(response){
+            success: function(response) {
                 console.log(response);
                 location.reload();
             }
-            
+
         });
     });
 }
