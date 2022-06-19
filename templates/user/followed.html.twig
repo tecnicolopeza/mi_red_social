@@ -23,7 +23,7 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-                <h1 class="display-4 text-center">People who follow {{profile_user.nick}}</h1>
+                <h1 class="display-4 text-center text-secondary">People who follow {{profile_user.nick}}</h1>
         </div>
     </div>
 
@@ -65,7 +65,7 @@
                     "
                     data-btn-follow="{{user.id}}">Follow</button>
 
-                    <button type="button" class="btn btn-secondary btn-sm btn-unfollow
+                    <button type="button" class="btn btn-secondary text-light btn-sm btn-unfollow
                     
                     {% if followingStatus(app.user, user) == false %} 
 
