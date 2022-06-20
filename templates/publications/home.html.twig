@@ -67,11 +67,11 @@
                                             <small class="text-muted">{{ publication.created|timeAgo }}</small>
                                         </p>
 
-                                        
+                                        <span id="{{publication.id}}a" class="likes float-end p-1" value="{{publication.likes}}">{{publication.likes}}</span>                                        
 
                                         {% if publication.user_id is defined and publication.user_id != app.user.id %}
  
-                                        <span id="{{publication.id}}a" class="likes float-end p-1" value="{{publication.likes}}">{{publication.likes}}</span>
+                                        
 
                                             <button type="button" id="{{publication.id}}" class="btn float-end like btn-like
                                             

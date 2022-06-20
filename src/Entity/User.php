@@ -30,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     /**
      * @Assert\Email(
-     *     message = "El email '{{ value }}' no es un email valido."
+     *     message = "The email '{{ value }}' is not a valid email."
      * )
      */
     private $email;
@@ -39,6 +39,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    /**
+     * @Assert\Length(
+     *      min = 6,
+     *      minMessage = "The password must be greater than {{ limit }} characters."
+     * )
+     */
     private $password;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -46,8 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(
      *      min = 2,
      *      max = 10,
-     *      minMessage = "El name debe ser mayor a {{ limit }} caracteres.",
-     *      maxMessage = "El name no puede tener mas de {{ limit }} caracteres."
+     *      minMessage = "The name must be greater than {{ limit }} characters.",
+     *      maxMessage = "El name cannot have more than {{ limit }} characters."
      * )
      */
     private $name;
@@ -57,8 +63,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(
      *      min = 2,
      *      max = 10,
-     *      minMessage = "El surname debe ser mayor a {{ limit }} caracteres",
-     *      maxMessage = "El surname no puede tener mas de {{ limit }} caracteres"
+     *      minMessage = "The surname must be greater than {{ limit }} characters",
+     *      maxMessage = "The surname cannot have more than {{ limit }} characters"
      * )
      */
     private $surname;
