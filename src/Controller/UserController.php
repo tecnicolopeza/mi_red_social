@@ -102,7 +102,7 @@ class UserController extends AbstractController
                 $msg = 'Data modification faile, please try again.';
             }
             $this->session->getFlashBag()->add('msg',$msg); #funcionabilidad para mensajes de confirmación 
-            return $this->redirectToRoute('account'); #redirecciona al login
+            return $this->redirectToRoute('home'); #redirecciona al home
         }
         return $this->render('user/editUser.html.twig', [
             'title' => 'Account', 'form'=>$form->createView()

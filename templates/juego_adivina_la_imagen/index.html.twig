@@ -1,10 +1,9 @@
 {% include 'componentsHtml/nav.html.twig' %}
 {% block head %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
     <link href="{{ asset('css/juego.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 {% endblock %}
-
 {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
 {% endblock %}
@@ -95,7 +94,8 @@
 
 </div>
     {% block javascripts %}
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/common.js') }}"></script>
         {{ encore_entry_script_tags('app') }}
         <script src="https://unpkg.com/@webcreate/infinite-ajax-scroll/dist/infinite-ajax-scroll.min.js"></script>
         <script src="{{ asset('js/sidebars.js') }}"></script>
