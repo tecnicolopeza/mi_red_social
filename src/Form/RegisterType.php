@@ -27,7 +27,7 @@ class RegisterType extends AbstractType
             ))
             ->add('Register', SubmitType::class, array(
                 'attr'=> array(
-                    'class'=>'btn-dark mt-2'
+                    'class'=>'btn-primary text-light mt-2'
                 )
             ))
         ;
