@@ -3,9 +3,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link href="{{ asset('css/juego.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-
 {% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block body %}
     <title>{{title}}</title>
@@ -22,6 +24,10 @@
             <div class="d-flex respuestas justify-content-center">
                 <h3 class="text-center bg-success text-light p-2 rounded">Implementing</h3>
             </div>
+                <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary text-light w-50 text-center mx-auto my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Highest scores
+            </button>
         </div>
 
         <main class="col" id="tabla">
@@ -53,10 +59,6 @@
         
     </div>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Highest scores
-    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -67,21 +69,25 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <table class="text-center">
-                <tr>
-                    <td>User</td>
-                    <td>Score</td>
-                </tr>
+            <table class="tabla-puntuaciones table align-middle table-hover text-center mx-auto">
+                <thead>
+                    <tr class="align-middle table-dark text-light fw-bold">
+                        <td>User</td>
+                        <td>Score</td>
+                    </tr>
+                </thead>
+                <tbody class="table-primary fw-bold">
                 {% for score in pagination %}
                     <tr>
                         <td>{{score.user|userById.nick}}</td>
                         <td>{{score.score}}</td>
                     </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary text-light" data-bs-dismiss="modal">Close</button>
         </div>
         </div>
     </div>
@@ -89,6 +95,10 @@
 
 </div>
     {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        {{ encore_entry_script_tags('app') }}
+        <script src="https://unpkg.com/@webcreate/infinite-ajax-scroll/dist/infinite-ajax-scroll.min.js"></script>
+        <script src="{{ asset('js/sidebars.js') }}"></script>
         <script src="{{ asset('js/juego/generarAleatorio.js')}}"></script>
         <script src="{{ asset('js/juego/generadorTabla.js')}}"></script>
         <script src="{{ asset('js/juego/conexion.js')}}"></script>

@@ -54,3 +54,19 @@ tbody {
     width: 150px!important;
     height: 150px!important;
 }
+
+
+/* Reset estilos tabla puntuaciones */
+
+.tabla-puntuaciones {
+    /* border-spacing: 0; */
+    border: black 0px solid!important;
+    width: auto!important;
+    height: auto!important;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.tabla-puntuaciones td {
+    border: black 0px solid!important;
+}
