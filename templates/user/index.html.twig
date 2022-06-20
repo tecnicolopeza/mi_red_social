@@ -10,7 +10,10 @@
       <img src="{{ asset("img/index.jpg") }}" class="img-fluid" alt="image-principal" style="height:100vh; width:100vw;">
     </div>
     <div class="col col-lg-3 py-5 d-flex flex-column justify-content-between">
-      <h1 class="text-center m-2">OtakuRoom</h1>
+      <div class="mx-auto p-1 d-flex flex-column text-center">
+        <img style="filter: drop-shadow(1px 1px 1px grey);" src="{{ asset('img/img-server/logo.png') }}" class="img-fluid mx-auto" width="180px" alt="logo">
+        <h1 class="text-center m-2">OtakuRoom</h1>
+      </div>
       <div class="mx-auto p-1 d-flex flex-column text-center">
         <h4>¿No tienes una cuenta?</h4>
         <a class="btn text-decoration-none" href="{{ path('register') }}"><button type="button" class="btn btn-warning text-light fw-bolder">REGISTRARSE</button></a>
