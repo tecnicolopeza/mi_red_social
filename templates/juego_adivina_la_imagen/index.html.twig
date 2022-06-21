@@ -1,6 +1,5 @@
 {% include 'componentsHtml/nav.html.twig' %}
 {% block head %}
-   
     <link href="{{ asset('css/juego.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 {% endblock %}
@@ -23,13 +22,17 @@
             <div class="d-flex respuestas justify-content-center">
                 <h3 class="text-center bg-success text-light p-2 rounded">Implementing</h3>
             </div>
-                <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary text-light w-50 text-center mx-auto my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <!-- Button trigger modal rules -->
+            <button type="button" class="btn btn-primary fw-bold text-light w-50 text-center mx-auto my-3" data-bs-toggle="modal" data-bs-target="#rules">
+                Game's rules
+            </button>
+                <!-- Button trigger modal  puntuaciones -->
+            <button type="button" class="btn btn-primary fw-bold text-light w-50 text-center mx-auto my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Highest scores
             </button>
         </div>
 
-        <main class="col" id="tabla">
+        <main class="col" id="tabla" >
             <h4 class="text-center" id="intentos"></h4>
             <div class="same-line mx-auto">
                 <h4 class="text-center">Round: <span class="text-primary" id="rondas">10</span></h4>
@@ -59,7 +62,51 @@
     </div>
 
 
-    <!-- Modal -->
+        <!-- Modal rules -->
+    <div class="modal fade" id="rules" tabindex="-1" aria-labelledby="rules" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rules">Rules</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        Rules Guess the anime character
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            1º The game consists of 10 rounds at the end it will reset and save the score.
+                            If you don't get to round 10 we won't save your score so don't cheat!
+                        </li>
+                        <li class="list-group-item">
+                            2º  Clicking on a square will subtract 1 from "Remaining attempts". If you use more than 3 opportunities 
+                            you will not earn points. And you have a maximum of 4 chances.
+                        </li>
+                        <li class="list-group-item">
+                            3º When checking you only have to put the name or surname of the character.
+                            The full name will not be accepted.
+                            We are developing other versions of different difficulty where we will implement it.
+                        </li>
+                        <li class="list-group-item">
+                            4º There is a maximum of 30 points. You will get a gold medal if you get the highest score, 
+                            a silver medal if you reach a minimum of 20 points, and a bronze medal if you don't exceed the previous goal.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary text-light" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal puntuaciones -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
