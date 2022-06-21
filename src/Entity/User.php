@@ -73,6 +73,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $nick;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    /**
+     * @Assert\Length(
+     *      max = 200,
+     *      maxMessage = "The biography cannot have more than {{ limit }} characters"
+     * )
+     */
     private $bio;
 
     #[ORM\Column(type: 'string', length: 2)]
