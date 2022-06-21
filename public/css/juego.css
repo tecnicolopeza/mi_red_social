@@ -2,10 +2,14 @@ table {
     border-spacing: 0;
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
 
 td {
-    border: black 1px solid!important;
+    /* border: #3579E6 2px solid!important; */
+    border: white 2px solid!important;
+    transition: 0.6s!important;
 }
 
 td {
@@ -20,19 +24,27 @@ tbody {
 }
 
 #oculto {
-    background-color: gainsboro!important;
+    /* background-color: gainsboro!important; */
+    background-color: #3579E6 !important;
     transition: 0.6s!important;
     transform: scale(1)!important;
 }
 
 #oculto:hover {
     cursor: pointer!important;
-    transform: scale(1.1)!important;
+    transform: scale(1.05)!important;
     position: absolute!important;
     /*hace falta para que se super ponga*/
     z-index: 100!important;
     /* background-color: azure; */
+    border-radius: 0.5rem;
+    overflow: hidden;
 }
+
+
+/* td:hover {
+    border: #ffc107 2px solid!important;
+} */
 
 #visible {
     background-color: transparent!important;

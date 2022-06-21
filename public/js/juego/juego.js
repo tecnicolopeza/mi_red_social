@@ -50,7 +50,7 @@ function jugar() {
         //insertar llamada a bd
         $.ajax({ //comunicación asincrona envia datos
             url: '/scoreUp',
-            data: { name:'AciertaImagen', score: puntuacion },
+            data: { name: 'AciertaImagen', score: puntuacion },
             type: 'POST',
             success: function(data) {
                 console.log(data);
@@ -80,14 +80,14 @@ async function comprobarRespuesta() { //asincrona para que permita el setTimeout
     let respuesta = document.getElementById("respuesta").value;
 
     if (respuesta == "" || respuesta == " ") {
-        alert("El personaje era " + personajes[ultimoAleatorio].name.full);
+        alert("The character was " + personajes[ultimoAleatorio].name.full + "!");
     } else {
 
         if (validarNombre(respuesta.toLowerCase(), personajes[ultimoAleatorio].name.full.toLowerCase())) {
-            alert("¡Se nota que sabes de esto! Era " + personajes[ultimoAleatorio].name.full);
+            alert("It looks like you know about this! It was " + personajes[ultimoAleatorio].name.full + "!");
             puntuacion = puntuacion + intentos;
         } else {
-            alert("¡Fallaste! Te queda mucho anime por ver, era " + personajes[ultimoAleatorio].name.full);
+            alert("You failed! You still have a lot of anime to watch! It was " + personajes[ultimoAleatorio].name.full + "!");
         }
     }
 
