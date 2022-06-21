@@ -14,10 +14,10 @@
             {% if app.user != null %}
             <ul class="navbar-nav ml-4">
                 <li class="nav-item">
-                    <a href="{{ path('home') }}" class="nav-link">Home</a>
+                    <a href="{{ path('home') }}" class="nav-link active">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('people') }}" class="nav-link">People</a>
+                    <a href="{{ path('people') }}" class="nav-link active">People</a>
                 </li>
             </ul>
 
@@ -30,7 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ path('login') }}">Login</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ path('register') }}">Register</a>
                 </li>
             {% endif %}

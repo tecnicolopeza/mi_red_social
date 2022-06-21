@@ -75,7 +75,7 @@ tbody {
     border: black 0px solid!important;
     width: auto!important;
     height: auto!important;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     overflow: hidden;
 }
 
