@@ -47,13 +47,13 @@
                             {% if app.user.id != user.id %}
                                 <div class="float-end">
 
-                                    {% if followingStatus(app.user, user) == true %}
+                                    {% if followingStatus(user, app.user) == true %}
                                         <button class="btn btn-sm btn-disable disable" disabled>
-                                            follows you
+                                            Follows you
                                         </button>
                                     {% else %}
                                         <button class="btn btn-sm btn-disable disable" disabled>
-                                            it does not follow you
+                                            Doesn't follow you
                                         </button>
                                     {% endif %}
 
