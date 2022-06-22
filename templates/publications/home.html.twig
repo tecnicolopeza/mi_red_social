@@ -156,7 +156,7 @@
             <div class="card mb-3 border-secondary">
                 <div class="row d-flex">
                     <div class="col-md-4">
-                        <div class="card-body">
+                        <div class="card-body text-center text-lg-start">
                             {% if app.user.image == null %}
 
                             <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle" style="width:6em; height:6em;">
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body mt-3">
+                        <div class="card-body mt-3  text-center text-md-start">
                             <a href="{{ path('profile')}}" class="card-title text-decoration-none fw-bolder h4">{{app.user.nick}}</a>
                             <p class="card-text text-secondary">{{app.user.name}} {{app.user.surname}}</p>
                         </div>

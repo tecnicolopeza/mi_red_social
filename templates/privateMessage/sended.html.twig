@@ -34,7 +34,7 @@
         
         <div class="row box-default">
             <div class="col-lg-6">
-                    <a href="{{ path('privateMessage')}}" class="btn btn-warning">View received messages</a>
+                    <a href="{{ path('privateMessage')}}" class="btn btn-primary text-light">View received messages</a>
             </div>
 
             <div class="col-lg-6">
@@ -58,17 +58,17 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="card-body">
-                                        <a href="{{path('profile', {'nickname': message.sender_id|userById.nick})}}" class="text-decoration-none text-dark" style="font-weight:500">
+                                        <a href="{{path('profile', {'nickname': message.sender_id|userById.nick})}}" class="text-decoration-none text-secondary ps-2" style="font-weight:500">
                                             {{message.sender_id|userById.nick}}
                                         </a>
                                         -
-                                            For <a class="text-decoration-none text-dark" href="{{path('profile', {'nickname': message.receiver_id|userById.nick})}}"> {{message.receiver_id|userById.nick}}</a>
+                                            <span style="color: #000">For<span> <a class="text-decoration-none" href="{{path('profile', {'nickname': message.receiver_id|userById.nick})}}"> {{message.receiver_id|userById.nick}}</a>
                                         -
                                         <p class="card-text d-inline-block mb-1">
                                             <small class="text-muted">{{ message.created|timeAgo }}</small>
                                         </p>
                                         
-                                        <p class="card-text">{{ message.message }}</p>
+                                        <p class="card-text ps-2">{{ message.message }}</p>
                                         
                                         {# Si la publicacion tiene img subida #}
                                         {% if message.image is defined and message.image != 'empty' %}

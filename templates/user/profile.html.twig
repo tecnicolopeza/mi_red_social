@@ -40,7 +40,7 @@
                             <p class="card-text">{{user.bio}}</p>
                             {% if user.id == app.user.id %}
                                 <div class="d-flex flex-row-reverse p-3">
-                                    <a href="{{ path('account')}}" class=""><button type="button" class="btn btn-outline-info">Modify account</button></a>
+                                    <a href="{{ path('account')}}" class=""><button type="button" class="btn btn-primary text-light">Modify account</button></a>
                                 </div>
                             {% endif %}
 
@@ -122,7 +122,7 @@
                         <div class="card border-top-0 publication-item">
                             <div class="row">
                                 {# CARD PUBLICACION #}
-                                <div class="col-md-2 d-flex flex-align justify-content-end">
+                                <div class="col-md-2 d-flex flex-align justify-content-start justify-content-sm-end">
                                     {% if publication.user_id|userById.image == null %}
 
                                     <img src="{{ asset("img/default.jpg") }}" alt="" class="rounded-circle m-3" style="width:7em; height:em;">
