@@ -40,11 +40,11 @@ function jugar() {
         }
     } else {
         if (puntuacion >= 30) {
-            alert("¡Partida acabada! Medalla de ORO  \nSal un poco a que te de el sol");
+            alert("Finished game! GOLD medal!  \nYou need some sunlight... D:");
         } else if (puntuacion < 30 && puntuacion >= 20) {
-            alert("¡Partida acabada! Medalla de PLATA  \nNada mal :o");
+            alert("Finished game! SILVER medal  \nYou're close to be a hikkikomori! UwU");
         } else {
-            alert("¡Partida acabada! Medalla de BRONCE  \nTe falta ver un poco de anime compañero :P");
+            alert("Finished game! BRONZE medal  \nYou need to watch a little bit more of anime... u.u");
         }
 
         //insertar llamada a bd
@@ -62,7 +62,8 @@ function jugar() {
         puntuacion = 0;
         document.getElementById("rondas").innerText = rondas;
         document.getElementById("puntuacion").innerText = puntuacion;
-        jugar();
+        // jugar();
+        location.reload();
 
     }
 

@@ -32,13 +32,6 @@ tbody {
 
 #oculto:hover {
     cursor: pointer!important;
-    transform: scale(1.05)!important;
-    position: absolute!important;
-    /*hace falta para que se super ponga*/
-    z-index: 100!important;
-    /* background-color: azure; */
-    border-radius: 0.5rem;
-    overflow: hidden;
 }
 
 
@@ -81,4 +74,16 @@ tbody {
 
 .tabla-puntuaciones td {
     border: black 0px solid!important;
+}
+
+@media screen and (min-width: 768px) {
+    #oculto:hover {
+        transform: scale(1.05)!important;
+        position: absolute!important;
+        /*hace falta para que se super ponga*/
+        z-index: 100!important;
+        /* background-color: azure; */
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
 }
