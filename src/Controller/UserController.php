@@ -68,8 +68,13 @@ class UserController extends AbstractController
         $user_image = $this->getUser()->getImage();
         $form = $this->createForm(EditUserType::class, $this->getUser());
 
+<<<<<<< HEAD
 
         $form->handleRequest($request); #Para gestionar envíos de formularios https://symfony.com/doc/current/components/form.html
+=======
+        // Procesamos los datos del formulario
+        $form->handleRequest($request);
+>>>>>>> bf5839f198a0f224fc850fb0d94711c7082774f3
 
         $repository = $doctrine->getRepository(User::class); //acceso repositorio entidad User
         $user_bbdd = $repository->findOneBy(['email'=>$this->getUser()->getEmail()]);

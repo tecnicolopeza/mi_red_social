@@ -93,6 +93,7 @@ class PrivateMessageController extends AbstractController
 
         $private_messages = $this->getPrivateMessages($request, "received", $doctrine, $paginator);
 
+        // Funcion que pone el mensaje como leido
         $this->setReadedAction($user,$doctrine);
 
         return $this->render('privateMessage/index.html.twig', [

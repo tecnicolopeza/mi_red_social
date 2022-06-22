@@ -1,9 +1,15 @@
 $(document).ready(function() {
 
+    //https://docs.infiniteajaxscroll.com/reference/options
+    //https://docs.infiniteajaxscroll.com/getting-started para el codigo js
+
+    //hay que editar: vendor/knplabs/knp-paginator-bundle/templates/Pagination/twitter_bootstrap_v4_pagination.html.twig -> de aqui elegimos el link-netx en next 
+
     console.log("user Script working properly");
 
-    let ias = new InfiniteAjaxScroll('.content-users', {
-        item: '.user-item',
+    //realiza el cargado y muestra el spinner
+    let ias = new InfiniteAjaxScroll('.content-users', { //content-users es el contenedor donde hace el scroll infinito
+        item: '.user-item', //clase de usuario por el que muestra cada usuario
         next: '.pagination .link-next',
         pagination: '.pagination',
         spinner: {
@@ -17,6 +23,8 @@ $(document).ready(function() {
             }
         }
     });
+
+    //ultimo mensaje en caso de que no haya mas usuarios
     ias.on('last', function() {
         let el = document.querySelector('.no-more');
 
