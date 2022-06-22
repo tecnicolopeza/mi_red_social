@@ -70,6 +70,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $surname;
 
     #[ORM\Column(type: 'string', length: 60, nullable: true)]
+    /**
+     * @Assert\Length(
+     *      max = 20,
+     *      maxMessage = "The Nick cannot have more than {{ limit }} characters"
+     * )
+     */
     private $nick;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

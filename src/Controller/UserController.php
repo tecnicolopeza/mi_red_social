@@ -64,7 +64,7 @@ class UserController extends AbstractController
         $user_image = $this->getUser()->getImage();
         $form = $this->createForm(EditUserType::class, $this->getUser());
 
-
+        // Procesamos los datos del formulario
         $form->handleRequest($request);
 
         $repository = $doctrine->getRepository(User::class); //acceso repositorio entidad User
