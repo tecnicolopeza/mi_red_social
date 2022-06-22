@@ -27,8 +27,12 @@ class UserController extends AbstractController
 
     #[Route('/', name: 'index')]
     public function index(){
+        //En caso de estar registrado no puedes entrar
+        if (is_object($this->getUser())) {
+            return $this->redirectToRoute('home');
+        }
         return $this->render('user/index.html.twig', [
-            'title' => 'Index',
+            'title' => 'Index', //esto es una variable le llamamos titulo
         ]);
     }
 
@@ -65,7 +69,7 @@ class UserController extends AbstractController
         $form = $this->createForm(EditUserType::class, $this->getUser());
 
 
-        $form->handleRequest($request);
+        $form->handleRequest($request); #Para gestionar envíos de formularios https://symfony.com/doc/current/components/form.html
 
         $repository = $doctrine->getRepository(User::class); //acceso repositorio entidad User
         $user_bbdd = $repository->findOneBy(['email'=>$this->getUser()->getEmail()]);
@@ -73,7 +77,7 @@ class UserController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
             if ($user_bbdd != null && $user_bbdd->getEmail() == $this->getUser()->getEmail() &&
-            $user_bbdd->getNick() == $this->getUser()->getNick() || $user_bbdd == null) {
+            $user_bbdd->getNick() == $this->getUser()->getNick() || $user_bbdd == null) { //comprueba que el usuario este en la bd y que sea el mismo que en session
                 
                 $file = $form['image']->getData();
                 
@@ -83,7 +87,7 @@ class UserController extends AbstractController
                     if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'png' || $extension == 'gif') {
                         $name_img = $this->getUser()->getId() . time() . '.' .$extension;
 
-                        $file->move("img", $name_img);
+                        $file->move("img", $name_img); #mueve la imagen al directorio img
                         $this->getUser()->setImage($name_img);
                     }
                 }else{
@@ -94,6 +98,18 @@ class UserController extends AbstractController
                 $entityManager = $doctrine->getManager();
                 $entityManager->persist($this->getUser());
                 $flush = $entityManager->flush();
+
+                /**Doctrine permite trabajar con bases de datos de una forma más especial que simplemente 
+                 * pasando filas de una tabla a un array. En su lugar, Doctrine permite persistir objetos enteros 
+                 * en la base de datos y extraer objetos enteros. 
+                 * Se enlaza una clase PHP con una tabla de base de datos, 
+                 * y las propiedades de esa clase PHP con las columnas de la tabla
+                 * 
+                 * Cuando se llama al método flush(), Doctrine mira entre los objetos que administra 
+                 * si hay alguno que también requiera ser persistido.
+                 * Ya que Doctrine está pendiente de todas las entidades administradas,
+                 * cuando llamas al método flush() ejecuta las sentencias en el orden correcto.
+                 * */
             }
             if ($flush == null) { #si el registro fue correcto
                 $msg = 'Data modification has been successful.';
@@ -116,16 +132,16 @@ class UserController extends AbstractController
 
         $em = $doctrine->getManager();
         $repository = $em->getRepository(User::class);
-        $query = $repository->createQueryBuilder('p')
+        $query = $repository->createQueryBuilder('p') #crea una consulta del repositorio User
         ->orderBy('p.id','ASC')->getQuery();
         $users = $paginator->paginate(
             $query,
             $request->query->getInt('page',1),
-            5
+            5 #5 usuarios de paginacion
         );
 
         return $this->render('user/users.html.twig', [
-            'title' => 'People', 'users' => $users
+            'title' => 'People', 'users' => $users #devuelve el titulo y el array de usuarios de la consulta
         ]);
     }
 
@@ -144,7 +160,7 @@ class UserController extends AbstractController
         $repository = $em->getRepository(User::class);
         $query = $repository->createQueryBuilder('p')
         ->orderBy('p.id','ASC')
-        ->where('p.name LIKE :searchTerm OR p.surname LIKE :searchTerm OR p.nick LIKE :searchTerm')
+        ->where('p.name LIKE :searchTerm OR p.surname LIKE :searchTerm OR p.nick LIKE :searchTerm') #busca todos los usuarios donde su nombre apellido o lo que se ha enviado por parametros contenga esos caracteres
         ->setParameter('searchTerm','%' . $search . '%')->getQuery();
         $users = $paginator->paginate(
             $query,
