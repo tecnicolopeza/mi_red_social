@@ -43,9 +43,9 @@
                 <a href="{{ path('sended')}}" class="btn btn-primary text-light">View sent messages</a>
             </div>
 
-            <div class="col-lg-6 ms-5">
+            <div class="col-lg-6 ms-lg-5">
 
-                <h4 class="text-secondary">Received messages</h4>
+                <h4 class="text-secondary mt-4 mt-lg-0">Received messages</h4>
                 <hr />
 
                 <div class="card-body text-secondary p-0 content-publications">                 
@@ -64,7 +64,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-md-10">
-                                    <div class="card-body ms-5">
+                                    <div class="card-body ms-lg-5">
                                         <a href="{{path('profile', {'nickname': message.sender_id|userById.nick})}}" class="text-decoration-none text-secondary" style="font-weight:500">
                                             {{message.sender_id|userById.nick}}
                                         </a>
